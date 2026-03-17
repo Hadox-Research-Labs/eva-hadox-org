@@ -46,12 +46,10 @@ steps:
         --exclude "*.log"
         ./ deploy@191.101.233.39:/home/deploy/eva.hadox.org/
       - >
-        printf '%s\n'
-        'set -euo pipefail'
-        'cd /home/deploy/eva.hadox.org'
-        'chmod +x scripts/drone_deploy.sh'
-        './scripts/drone_deploy.sh'
-        | ssh -p 22 deploy@191.101.233.39 /bin/sh -s
+        ssh -p 22 deploy@191.101.233.39
+        "cd /home/deploy/eva.hadox.org &&
+        chmod +x scripts/drone_deploy.sh &&
+        /bin/bash ./scripts/drone_deploy.sh"
     when:
       event:
         - push
