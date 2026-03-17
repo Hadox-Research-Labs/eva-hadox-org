@@ -39,39 +39,115 @@ const networkColumnLabels = {
 const sectionLabels = {
   es: {
     nav: 'Navegación',
-    overview: 'Panorama',
-    analysis: 'Análisis',
-    mentions: 'Menciones',
-    workspace: 'Trabajo editorial',
-    sources: 'Fuentes',
-    about: 'Eva',
+    currentLabel: 'Vista actual',
+    overview: {
+      label: 'Panorama',
+      blurb: 'Objetivo, método y estado general del corpus.',
+    },
+    analysis: {
+      label: 'Análisis',
+      blurb: 'Filtros, gráficas y relaciones entre términos y obras.',
+    },
+    mentions: {
+      label: 'Menciones',
+      blurb: 'Pruebas textuales y comparación contextual.',
+    },
+    workspace: {
+      label: 'Trabajo editorial',
+      blurb: 'Léxico, OCR y carga colaborativa de documentos.',
+    },
+    sources: {
+      label: 'Fuentes',
+      blurb: 'Corpus curado y prospección documental.',
+    },
+    about: {
+      label: 'Eva',
+      blurb: 'Perfil de investigación y conducción del proyecto.',
+    },
   },
   en: {
     nav: 'Navigation',
-    overview: 'Overview',
-    analysis: 'Analysis',
-    mentions: 'Mentions',
-    workspace: 'Editorial work',
-    sources: 'Sources',
-    about: 'Eva',
+    currentLabel: 'Current view',
+    overview: {
+      label: 'Overview',
+      blurb: 'Purpose, method, and corpus-wide status.',
+    },
+    analysis: {
+      label: 'Analysis',
+      blurb: 'Filters, charts, and term-to-work relations.',
+    },
+    mentions: {
+      label: 'Mentions',
+      blurb: 'Textual evidence and contextual comparison.',
+    },
+    workspace: {
+      label: 'Editorial work',
+      blurb: 'Lexicon, OCR, and collaborative ingestion.',
+    },
+    sources: {
+      label: 'Sources',
+      blurb: 'Curated corpus and document prospecting.',
+    },
+    about: {
+      label: 'Eva',
+      blurb: 'Research profile and project stewardship.',
+    },
   },
   fr: {
     nav: 'Navigation',
-    overview: 'Vue d’ensemble',
-    analysis: 'Analyse',
-    mentions: 'Mentions',
-    workspace: 'Travail editorial',
-    sources: 'Sources',
-    about: 'Eva',
+    currentLabel: 'Vue active',
+    overview: {
+      label: 'Vue d’ensemble',
+      blurb: 'Objet, methode et etat general du corpus.',
+    },
+    analysis: {
+      label: 'Analyse',
+      blurb: 'Filtres, graphiques et relations terme-oeuvre.',
+    },
+    mentions: {
+      label: 'Mentions',
+      blurb: 'Preuves textuelles et comparaison contextuelle.',
+    },
+    workspace: {
+      label: 'Travail editorial',
+      blurb: 'Lexique, OCR et collecte collaborative.',
+    },
+    sources: {
+      label: 'Sources',
+      blurb: 'Corpus cure et prospection documentaire.',
+    },
+    about: {
+      label: 'Eva',
+      blurb: 'Profil de recherche et conduite du projet.',
+    },
   },
   pt: {
     nav: 'Navegação',
-    overview: 'Panorama',
-    analysis: 'Análise',
-    mentions: 'Menções',
-    workspace: 'Trabalho editorial',
-    sources: 'Fontes',
-    about: 'Eva',
+    currentLabel: 'Vista atual',
+    overview: {
+      label: 'Panorama',
+      blurb: 'Propósito, método e estado geral do corpus.',
+    },
+    analysis: {
+      label: 'Análise',
+      blurb: 'Filtros, gráficos e relações entre termos e obras.',
+    },
+    mentions: {
+      label: 'Menções',
+      blurb: 'Provas textuais e comparação contextual.',
+    },
+    workspace: {
+      label: 'Trabalho editorial',
+      blurb: 'Léxico, OCR e carga colaborativa.',
+    },
+    sources: {
+      label: 'Fontes',
+      blurb: 'Corpus curado e prospecção documental.',
+    },
+    about: {
+      label: 'Eva',
+      blurb: 'Perfil de pesquisa e condução do projeto.',
+    },
   },
 }
 
@@ -120,14 +196,6 @@ function App() {
   const localeOptions = ['es', 'en', 'fr', 'pt']
   const networkColumns = networkColumnLabels[activeLocale]
   const sectionCopy = sectionLabels[activeLocale]
-  const sections = [
-    { id: 'overview', label: sectionCopy.overview },
-    { id: 'analysis', label: sectionCopy.analysis },
-    { id: 'mentions', label: sectionCopy.mentions },
-    { id: 'workspace', label: sectionCopy.workspace },
-    { id: 'sources', label: sectionCopy.sources },
-    { id: 'about', label: sectionCopy.about },
-  ]
 
   function handleSectionChange(sectionId, anchorId = '') {
     setActiveSection(sectionId)
@@ -202,6 +270,71 @@ function App() {
   const project = {
     title: copy.projectTitle,
     focus: copy.projectFocus,
+  }
+  const sections = [
+    {
+      id: 'overview',
+      label: sectionCopy.overview.label,
+      blurb: sectionCopy.overview.blurb,
+      metric: `${analysis.summary.documentsTotal} ${copy.stats.documentsTotal}`,
+    },
+    {
+      id: 'analysis',
+      label: sectionCopy.analysis.label,
+      blurb: sectionCopy.analysis.blurb,
+      metric: `${cooccurrenceLabel(analysis)} ${copy.controls.cooccurrencePairs}`,
+    },
+    {
+      id: 'mentions',
+      label: sectionCopy.mentions.label,
+      blurb: sectionCopy.mentions.blurb,
+      metric: `${analysis.summary.totalMentions} ${copy.stats.totalMentions}`,
+    },
+    {
+      id: 'workspace',
+      label: sectionCopy.workspace.label,
+      blurb: sectionCopy.workspace.blurb,
+      metric: `${analysis.summary.configuredTerms} ${copy.stats.configuredTerms}`,
+    },
+    {
+      id: 'sources',
+      label: sectionCopy.sources.label,
+      blurb: sectionCopy.sources.blurb,
+      metric: `${discoveredDocuments.length} ${copy.stats.prospectedSources}`,
+    },
+    {
+      id: 'about',
+      label: sectionCopy.about.label,
+      blurb: sectionCopy.about.blurb,
+      metric: copy.evaName,
+    },
+  ]
+  const activeSectionMeta =
+    sections.find((section) => section.id === activeSection) ?? sections[0]
+
+  function handleSectionKeyDown(event, sectionId) {
+    const currentIndex = sections.findIndex((section) => section.id === sectionId)
+    if (currentIndex === -1) {
+      return
+    }
+
+    let nextIndex = currentIndex
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIndex = (currentIndex + 1) % sections.length
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIndex = (currentIndex - 1 + sections.length) % sections.length
+    } else if (event.key === 'Home') {
+      nextIndex = 0
+    } else if (event.key === 'End') {
+      nextIndex = sections.length - 1
+    } else {
+      return
+    }
+
+    event.preventDefault()
+    const nextSection = sections[nextIndex]
+    handleSectionChange(nextSection.id)
   }
 
   const termLookup = new Map(terms.map((term) => [term.id, term]))
@@ -567,22 +700,48 @@ function App() {
       </section>
 
       <nav className="section-nav-panel" aria-label={sectionCopy.nav}>
-        <p className="section-label">{sectionCopy.nav}</p>
-        <div className="section-nav-grid">
-          {sections.map((section, index) => (
-            <button
-              key={section.id}
-              type="button"
-              className={`section-nav-button ${
-                activeSection === section.id ? 'is-active' : ''
-              }`}
-              onClick={() => handleSectionChange(section.id)}
-              aria-pressed={activeSection === section.id}
-            >
-              <span className="nav-kicker">{String(index + 1).padStart(2, '0')}</span>
-              <strong>{section.label}</strong>
-            </button>
-          ))}
+        <div className="section-nav-head">
+          <div>
+            <p className="section-label">{sectionCopy.nav}</p>
+            <h2 className="section-nav-title">{activeSectionMeta.label}</h2>
+          </div>
+          <p className="section-nav-summary">{activeSectionMeta.blurb}</p>
+        </div>
+
+        <div className="section-nav-shell">
+          <ol className="section-nav-list" role="tablist" aria-label={sectionCopy.nav}>
+            {sections.map((section, index) => (
+              <li key={section.id} className="section-nav-item">
+                <button
+                  id={`section-tab-${section.id}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeSection === section.id}
+                  aria-controls={`section-panel-${section.id}`}
+                  tabIndex={activeSection === section.id ? 0 : -1}
+                  className={`section-nav-button ${
+                    activeSection === section.id ? 'is-active' : ''
+                  }`}
+                  onClick={() => handleSectionChange(section.id)}
+                  onKeyDown={(event) => handleSectionKeyDown(event, section.id)}
+                >
+                  <span className="nav-kicker">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="section-nav-copy">
+                    <strong>{section.label}</strong>
+                    <small>{section.blurb}</small>
+                  </span>
+                  <span className="section-nav-metric">{section.metric}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+
+          <aside className="section-nav-current" aria-live="polite">
+            <span className="section-nav-marker">{sectionCopy.currentLabel}</span>
+            <h3>{activeSectionMeta.label}</h3>
+            <p>{activeSectionMeta.blurb}</p>
+            <div className="section-nav-current-metric">{activeSectionMeta.metric}</div>
+          </aside>
         </div>
       </nav>
 
@@ -595,7 +754,12 @@ function App() {
       </section>
 
       {activeSection === 'overview' ? (
-        <>
+        <div
+          className="section-stage"
+          role="tabpanel"
+          id="section-panel-overview"
+          aria-labelledby="section-tab-overview"
+        >
           <section className="study-grid study-grid-single">
             <article className="study-card">
               <p className="section-label">{copy.purposeLabel}</p>
@@ -641,11 +805,16 @@ function App() {
               ))}
             </div>
           </section>
-        </>
+        </div>
       ) : null}
 
       {activeSection === 'analysis' ? (
-        <>
+        <div
+          className="section-stage"
+          role="tabpanel"
+          id="section-panel-analysis"
+          aria-labelledby="section-tab-analysis"
+        >
           <section className="controls-panel">
             <div className="section-heading">
               <div>
@@ -813,11 +982,16 @@ function App() {
               recordColumnLabel={networkColumns.works}
             />
           </div>
-        </>
+        </div>
       ) : null}
 
       {activeSection === 'mentions' ? (
-        <section className="archive-layout">
+        <section
+          className="archive-layout section-stage"
+          role="tabpanel"
+          id="section-panel-mentions"
+          aria-labelledby="section-tab-mentions"
+        >
           <div className="list-panel">
             <div className="list-heading">
               <div>
@@ -940,7 +1114,12 @@ function App() {
       ) : null}
 
       {activeSection === 'workspace' ? (
-        <section className="workspace-grid">
+        <section
+          className="workspace-grid section-stage"
+          role="tabpanel"
+          id="section-panel-workspace"
+          aria-labelledby="section-tab-workspace"
+        >
           <div className="workspace-card">
             <div className="section-heading">
               <div>
@@ -1289,7 +1468,12 @@ function App() {
       ) : null}
 
       {activeSection === 'sources' ? (
-        <>
+        <div
+          className="section-stage"
+          role="tabpanel"
+          id="section-panel-sources"
+          aria-labelledby="section-tab-sources"
+        >
           <section className="documents-section">
             <div className="section-heading">
               <div>
@@ -1364,11 +1548,16 @@ function App() {
               ))}
             </div>
           </section>
-        </>
+        </div>
       ) : null}
 
       {activeSection === 'about' ? (
-        <section className="study-grid study-grid-single">
+        <section
+          className="study-grid study-grid-single section-stage"
+          role="tabpanel"
+          id="section-panel-about"
+          aria-labelledby="section-tab-about"
+        >
           <article className="study-card">
             <p className="section-label">{copy.studySectionLabel}</p>
             <h2>{copy.evaName}</h2>
@@ -1416,6 +1605,10 @@ function parseVariants(value) {
     .split(/[\n,]/)
     .map((entry) => entry.trim())
     .filter(Boolean)
+}
+
+function cooccurrenceLabel(analysis) {
+  return analysis?.cooccurrences?.length ?? 0
 }
 
 function buildTimeline(documents, mentionSummaryByDocument) {
