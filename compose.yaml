@@ -1,0 +1,14 @@
+services:
+  archive:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: breast-cancer-archive
+    environment:
+      PORT: 8080
+      DATA_DIR: /app/runtime-data
+    ports:
+      - "4173:8080"
+    volumes:
+      - ./runtime-data:/app/runtime-data
+    restart: unless-stopped

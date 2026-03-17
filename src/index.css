@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --paper: #f4ece0;
+  --paper-light: #fbf7ef;
+  --ink: #261714;
+  --muted: #6d5a54;
+  --accent: #a73121;
+  --accent-dark: #7f261c;
+  --line: rgba(93, 38, 32, 0.12);
+  --heading: 'Fraunces', Georgia, serif;
+  --sans: 'Public Sans', 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+
+  font-family: var(--sans);
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(167, 49, 33, 0.12), transparent 32%),
+    radial-gradient(circle at 85% 15%, rgba(143, 102, 33, 0.1), transparent 28%),
+    linear-gradient(180deg, #f8f2e8 0%, #eee2d0 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.28)),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 30px,
+      rgba(93, 38, 32, 0.018) 30px,
+      rgba(93, 38, 32, 0.018) 31px
+    ),
+    var(--paper);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--heading);
+  color: var(--ink);
+  line-height: 1.05;
+}
+
+h1 {
+  font-size: clamp(2.8rem, 4vw, 4.9rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 2.6vw, 2.6rem);
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+p,
+li {
+  margin: 0;
+}
+
+code {
+  font-family: var(--mono);
+}

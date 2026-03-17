@@ -1,0 +1,74 @@
+[
+  {
+    "id": "hndm",
+    "name": "Hemeroteca Nacional Digital de México",
+    "country": "México",
+    "url": "https://www.hndm.unam.mx/index.php/es/acerca-de-hndm",
+    "focus": "Prensa mexicana, avisos, necrológicas y notas médicas.",
+    "queries": [
+      "\"cáncer del seno\"",
+      "\"escirro de la mama\"",
+      "\"cáncer del pecho\""
+    ]
+  },
+  {
+    "id": "chronicling-america",
+    "name": "Chronicling America",
+    "country": "Estados Unidos",
+    "url": "https://chroniclingamerica.loc.gov/",
+    "focus": "Prensa histórica con mortalidad, anuncios de curas y notas de hospitales.",
+    "queries": [
+      "\"cancer of the breast\"",
+      "\"scirrhus\" breast",
+      "\"cancer cure\" breast"
+    ]
+  },
+  {
+    "id": "wellcome",
+    "name": "Wellcome Collection",
+    "country": "Reino Unido",
+    "url": "https://wellcomecollection.org/",
+    "focus": "Testimonios, artículos médicos, iconografía quirúrgica y manuscritos.",
+    "queries": [
+      "\"breast\" cancer",
+      "mastectomy",
+      "\"mammary\""
+    ]
+  },
+  {
+    "id": "internet-archive",
+    "name": "Internet Archive",
+    "country": "Global",
+    "url": "https://archive.org/",
+    "focus": "Tratados médicos, manuales de partería, OCR descargable y varias ediciones.",
+    "queries": [
+      "\"scirrhus of the breast\"",
+      "\"diseases of the breast\"",
+      "\"midwifery\" breast"
+    ]
+  },
+  {
+    "id": "bne",
+    "name": "Hemeroteca Digital de la Biblioteca Nacional de España",
+    "country": "España",
+    "url": "https://www.bne.es/es/catalogos/hemeroteca-digital",
+    "focus": "Prensa española, revistas ilustradas y posible vocabulario hispano.",
+    "queries": [
+      "\"cáncer del seno\"",
+      "\"escirro del seno\"",
+      "\"cáncer de la mama\""
+    ]
+  },
+  {
+    "id": "national-archives-middlesex",
+    "name": "National Archives: Middlesex Hospital",
+    "country": "Reino Unido",
+    "url": "https://discovery.nationalarchives.gov.uk/details/c/F102871",
+    "focus": "Pistas para localizar registros del Middlesex Hospital y fondos relacionados.",
+    "queries": [
+      "\"Middlesex Hospital\" cancer",
+      "\"casebook\" breast",
+      "\"register\" cancer"
+    ]
+  }
+]

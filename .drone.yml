@@ -1,0 +1,59 @@
+kind: pipeline
+type: docker
+name: eva-archive
+
+clone:
+  depth: 1
+  submodules: false
+
+trigger:
+  event:
+    - push
+    - pull_request
+  branch:
+    - main
+
+steps:
+  - name: validate
+    image: node:24-alpine
+    commands:
+      - npm ci
+      - npm run lint
+      - npm run build
+
+  - name: deploy
+    image: alpine:3.20
+    environment:
+      SSH_PRIVATE_KEY:
+        from_secret: EVA_DEPLOY_SSH_KEY
+    commands:
+      - apk add --no-cache openssh-client bash rsync
+      - mkdir -p /root/.ssh
+      - chmod 700 /root/.ssh
+      - eval "$(ssh-agent -s)"
+      - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+      - ssh-keyscan -p 22 191.101.233.39 >> /root/.ssh/known_hosts
+      - >
+        rsync -az --delete
+        -e "ssh -p 22"
+        --exclude ".git/"
+        --exclude ".github/"
+        --exclude ".idea/"
+        --exclude ".vscode/"
+        --exclude "node_modules/"
+        --exclude "dist/"
+        --exclude "runtime-data/"
+        --exclude "*.log"
+        ./ deploy@191.101.233.39:/home/deploy/eva.hadox.org/
+      - >
+        printf '%s\n'
+        'set -euo pipefail'
+        'cd /home/deploy/eva.hadox.org'
+        'chmod +x scripts/drone_deploy.sh'
+        './scripts/drone_deploy.sh'
+        | ssh -p 22 deploy@191.101.233.39 /bin/sh -s
+    when:
+      event:
+        - push
+      branch:
+        - main

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "midwifery",
+    "title": "Manuales de parteras y puerperio",
+    "years": "1600-1850",
+    "goal": "Capturar cómo se describen induración, pezones agrietados, abscesos y estasis de leche antes de llamarlos cáncer con certeza.",
+    "targets": "manuales, recetarios domésticos, tratados de lactancia"
+  },
+  {
+    "id": "womens-press",
+    "title": "Prensa femenina y revistas del hogar",
+    "years": "1830-1900",
+    "goal": "Encontrar cómo circula el tema fuera del hospital: consejos, pánico moral, publicidad de curas y silencios sobre el pecho.",
+    "targets": "revistas para señoritas, magazines del hogar, columnas de salud"
+  },
+  {
+    "id": "hospital-casebooks",
+    "title": "Registros hospitalarios y casebooks",
+    "years": "1850-1900",
+    "goal": "Seguir edad, lado afectado, estado civil, profesiones, duración del bulto, recaída, operación y post-mortem.",
+    "targets": "casebooks, registros de consulta externa, libros de cirugía"
+  },
+  {
+    "id": "mortality",
+    "title": "Mortalidad y registros civiles",
+    "years": "1840-1900",
+    "goal": "Construir series de frecuencia y ver cuándo el cáncer de mama se vuelve categoría contable en tablas de salud pública.",
+    "targets": "juntas de salud, reportes semanales, anuarios"
+  },
+  {
+    "id": "commerce",
+    "title": "Mercado de curas y economía del miedo",
+    "years": "1800-1900",
+    "goal": "Rastrear anuncios, patentes, honorarios, dispositivos y promesas de erradicación para medir el valor económico del problema.",
+    "targets": "clasificados, anuncios médicos, catálogos comerciales"
+  }
+]

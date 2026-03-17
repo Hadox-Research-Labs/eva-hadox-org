@@ -1,0 +1,530 @@
+[
+  {
+    "id": "rowley-1772",
+    "title": "A Practical Treatise on Diseases of the Breast of Women",
+    "shortTitle": "Rowley, 1772",
+    "year": 1772,
+    "place": "Londres",
+    "language": "inglés",
+    "recordType": "manual de partería",
+    "status": "leido",
+    "sourceHost": "Internet Archive",
+    "scope": "obra",
+    "researchLenses": [
+      "nomenclatura",
+      "tratamiento",
+      "actores",
+      "pacientes",
+      "economia",
+      "parteria"
+    ],
+    "historicalTerms": [
+      "cancer",
+      "induration",
+      "lying-in",
+      "diseased nipples",
+      "abscess"
+    ],
+    "description": "Manual sobre padecimientos mamarios en embarazo, puerperio y lactancia. Presenta el cáncer como una secuela tardía de induración, grietas y estasis de leche mal tratadas.",
+    "howDescribed": "Relaciona la enfermedad con pechos duros, inflamados, dolorosos, pezones lesionados e induración persistente tras el parto.",
+    "treatmentNote": "Vaciar la leche, usar instrumentos para extraerla, vigilar los pezones y tratar absceso e induración antes de que evolucionen a una lesión temida.",
+    "actorsNote": "Médicos, parteras, nodrizas, madres y ayudantes domésticas aparecen como parte del circuito de observación y cuidado.",
+    "patientNote": "Mujeres en puerperio o lactancia; el cuerpo reproductivo y el pecho se leen como un continuo.",
+    "frequencyNote": "No ofrece estadística formal, pero habla del problema como consecuencia frecuente del manejo deficiente del pecho durante el lying-in.",
+    "economyNote": "Conecta la enfermedad con trabajo de cuidado, dispositivos para extraer leche y remedios descritos como baratos o cotidianos.",
+    "reportingNote": "La voz de la paciente queda mediada por el autor; lo que se registra es el manejo correcto del cuerpo femenino más que la experiencia subjetiva.",
+    "attachments": [
+      {
+        "label": "OCR local",
+        "kind": "ocr",
+        "url": "/raw/ocr/rowley-1772.txt",
+        "remoteUrl": "https://archive.org/download/bim_eighteenth-century_a-practical-treatise-on-_rowley-william-md_1772/bim_eighteenth-century_a-practical-treatise-on-_rowley-william-md_1772_djvu.txt",
+        "download": true
+      },
+      {
+        "label": "Internet Archive",
+        "kind": "source",
+        "url": "https://archive.org/details/bim_eighteenth-century_a-practical-treatise-on-_rowley-william-md_1772"
+      }
+    ]
+  },
+  {
+    "id": "bell-1788",
+    "title": "Thoughts on the Cancer of the Breast",
+    "shortTitle": "Bell, 1788",
+    "year": 1788,
+    "place": "Edimburgo",
+    "language": "inglés",
+    "recordType": "tratado quirúrgico",
+    "status": "leido",
+    "sourceHost": "Internet Archive",
+    "scope": "obra",
+    "researchLenses": [
+      "nomenclatura",
+      "tratamiento",
+      "pacientes",
+      "economia"
+    ],
+    "historicalTerms": [
+      "scirrhus",
+      "open cancer",
+      "drawn nipple",
+      "haemorrhage",
+      "pricking pains"
+    ],
+    "description": "Tratado centrado en el cáncer de mama cuando aún se describe muchas veces como scirrhus previo a un cáncer abierto y ulcerado.",
+    "howDescribed": "Lo reconoce por dureza irregular, retracción del pezón, dolor punzante, ulceración y hemorragia en fases avanzadas.",
+    "treatmentNote": "Defiende la extirpación temprana del scirrhus y, cuando eso ya no parece posible, medidas paliativas con opiáceos, cataplasmas y hemlock.",
+    "actorsNote": "Cirujanos y facultativos aparecen como jueces del momento oportuno de operar; la paciente aparece como cuerpo sufriente.",
+    "patientNote": "Las pacientes son mujeres con masas ya visibles o dolorosas; la progresión del mal se narra como casi inevitable una vez ulcerado.",
+    "frequencyNote": "No cuantifica, pero lo presenta como uno de los males más dolorosos y destructivos del cuerpo humano.",
+    "economyNote": "Menciona materiales baratos como mucílago de linaza y discute el costo humano de retrasar una operación.",
+    "reportingNote": "La descripción es intensamente clínica y sensorial, pero sigue sin incorporar la voz directa de la enferma.",
+    "attachments": [
+      {
+        "label": "OCR local",
+        "kind": "ocr",
+        "url": "/raw/ocr/bell-1788.txt",
+        "remoteUrl": "https://archive.org/download/b33022975/b33022975_djvu.txt",
+        "download": true
+      },
+      {
+        "label": "Internet Archive",
+        "kind": "source",
+        "url": "https://archive.org/details/b33022975"
+      }
+    ]
+  },
+  {
+    "id": "burney-1811",
+    "title": "Narrative of Fanny Burney's Mastectomy",
+    "shortTitle": "Burney, 1811",
+    "year": 1811,
+    "place": "París",
+    "language": "inglés",
+    "recordType": "testimonio de paciente",
+    "status": "leido",
+    "sourceHost": "Wellcome Collection",
+    "scope": "testimonio",
+    "researchLenses": [
+      "tratamiento",
+      "actores",
+      "pacientes",
+      "reporte"
+    ],
+    "historicalTerms": [
+      "operation",
+      "tumour",
+      "breast",
+      "surgery"
+    ],
+    "description": "Carta-memoria sobre una mastectomía anterior a la anestesia moderna. Es una de las fuentes más útiles para recuperar experiencia encarnada y no solo descripción médica.",
+    "howDescribed": "El problema aparece como tumor doloroso y amenazante cuya extracción exige violencia física extrema.",
+    "treatmentNote": "Cirugía sin anestesia general; la fuente sirve para estudiar dolor, tiempo operatorio, asistentes y ritual quirúrgico.",
+    "actorsNote": "Paciente, cirujanos, ayudantes y observadores; aquí sí se ve con claridad el reparto de cuerpos y autoridad dentro del cuarto de operación.",
+    "patientNote": "Mujer alfabetizada y socialmente privilegiada, por eso deja un testimonio excepcionalmente detallado.",
+    "frequencyNote": "No aporta conteos, pero sirve para comparar la rareza de tener voz de paciente frente al predominio de la voz profesional.",
+    "economyNote": "Sugiere el peso social y material del acceso a cirugía y al prestigio del entorno médico.",
+    "reportingNote": "Es una de las pocas piezas donde la paciente narra directamente el procedimiento y su percepción del tiempo y del dolor.",
+    "attachments": [
+      {
+        "label": "Wellcome Collection",
+        "kind": "source",
+        "url": "https://wellcomecollection.org/works/rq9wdrx3"
+      }
+    ]
+  },
+  {
+    "id": "cooper-1829",
+    "title": "Illustrations of the Diseases of the Breast",
+    "shortTitle": "Cooper, 1829",
+    "year": 1829,
+    "place": "Londres",
+    "language": "inglés",
+    "recordType": "atlas clínico",
+    "status": "leido",
+    "sourceHost": "Internet Archive",
+    "scope": "obra",
+    "researchLenses": [
+      "nomenclatura",
+      "tratamiento",
+      "actores",
+      "pacientes",
+      "reporte"
+    ],
+    "historicalTerms": [
+      "chronic mammary tumour",
+      "scirrhous tubercle",
+      "fungous tubercle",
+      "sore nipples",
+      "axilla"
+    ],
+    "description": "Texto clave para ver la transición desde el uso indiscriminado de cáncer para cualquier bulto hacia una taxonomía más fina de lesiones mamarias.",
+    "howDescribed": "Distingue tumores crónicos, lesiones inflamatorias y las formas malignas como scirrhous y fungous tubercle.",
+    "treatmentNote": "Insiste en la discriminación diagnóstica antes de operar; incluye manejo de pezones ulcerados y abscesos del pecho.",
+    "actorsNote": "El cirujano aparece como intérprete experto frente a la opinión vulgar que llama cáncer a todo bulto.",
+    "patientNote": "Se ven madres lactantes, mujeres con tumores benignos y pacientes atemorizadas por la posibilidad de una operación.",
+    "frequencyNote": "No da una estadística central, pero sí presenta categorías de enfermedad y trayectorias clínicas repetidas.",
+    "economyNote": "Señala explícitamente el alivio de evitar una operación dudosa en mujeres de quienes depende una familia entera.",
+    "reportingNote": "Muy útil para estudiar cómo una autoridad quirúrgica define qué cuenta y qué no cuenta como cáncer.",
+    "attachments": [
+      {
+        "label": "OCR local",
+        "kind": "ocr",
+        "url": "/raw/ocr/cooper-1829.txt",
+        "remoteUrl": "https://archive.org/download/b22007015_0001/b22007015_0001_djvu.txt",
+        "download": true
+      },
+      {
+        "label": "Internet Archive",
+        "kind": "source",
+        "url": "https://archive.org/details/b22007015_0001"
+      }
+    ]
+  },
+  {
+    "id": "birkett-1850",
+    "title": "The Diseases of the Breast, and Their Treatment",
+    "shortTitle": "Birkett, 1850",
+    "year": 1850,
+    "place": "Londres",
+    "language": "inglés",
+    "recordType": "tratado clínico",
+    "status": "leido",
+    "sourceHost": "Internet Archive",
+    "scope": "obra",
+    "researchLenses": [
+      "nomenclatura",
+      "frecuencia",
+      "pacientes",
+      "actores",
+      "reporte"
+    ],
+    "historicalTerms": [
+      "carcinoma",
+      "social condition",
+      "prolific",
+      "sterile",
+      "cachexia"
+    ],
+    "description": "Manual de mitad del siglo XIX que mezcla patología, clasificación y observaciones sociales de las pacientes.",
+    "howDescribed": "Usa carcinoma y cáncer de mama, cruza síntomas con edad, estado general y condición social.",
+    "treatmentNote": "Sirve más para clasificación y observación longitudinal que para un protocolo único de tratamiento.",
+    "actorsNote": "El cirujano se presenta como interrogador de biografía, salud previa y sufrimientos morales.",
+    "patientNote": "Resume 116 casos y distingue casadas, solteras, prolíficas y estériles; muestra cómo la medicina intentó socializar el riesgo.",
+    "frequencyNote": "Recoge que en 116 casos, 79 eran casadas y 37 solteras; entre 55 casadas, 47 habían tenido hijos y 8 eran estériles.",
+    "economyNote": "Sugiere interés en fertilidad, trabajo reproductivo y salud doméstica como parte de la inteligibilidad del caso.",
+    "reportingNote": "Es una buena fuente para estudiar el sesgo de registro: lo marital y reproductivo se recoge mejor que la voz propia de la enferma.",
+    "attachments": [
+      {
+        "label": "OCR local",
+        "kind": "ocr",
+        "url": "/raw/ocr/birkett-1850.txt",
+        "remoteUrl": "https://archive.org/download/diseasesofbreast00birk/diseasesofbreast00birk_djvu.txt",
+        "download": true
+      },
+      {
+        "label": "Internet Archive",
+        "kind": "source",
+        "url": "https://archive.org/details/diseasesofbreast00birk"
+      }
+    ]
+  },
+  {
+    "id": "faurot-1852",
+    "title": "Advertisement for a Proprietary Cancer Cure",
+    "shortTitle": "Sunday Dispatch, 1852",
+    "year": 1852,
+    "place": "Nueva York",
+    "language": "inglés",
+    "recordType": "prensa / anuncio",
+    "status": "parcial",
+    "sourceHost": "Chronicling America",
+    "scope": "nota de prensa",
+    "researchLenses": [
+      "economia",
+      "tratamiento",
+      "reporte"
+    ],
+    "historicalTerms": [
+      "cancer cure",
+      "eradicator",
+      "advertisement"
+    ],
+    "description": "Anuncio de una cura propietaria contra el cáncer. Es útil para rastrear el valor económico de la enfermedad y la competencia entre medicina regular y mercado de remedios.",
+    "howDescribed": "El cáncer aparece como problema susceptible de ser erradicado por producto comercial, no solo por cirugía hospitalaria.",
+    "treatmentNote": "Promesa de curación por preparado o método comercializado fuera del lenguaje académico.",
+    "actorsNote": "Empresarios terapéuticos, prensa y público consumidor.",
+    "patientNote": "La paciente aparece como compradora potencial o familiar desesperado, más que como sujeto clínico.",
+    "frequencyNote": "No cuenta casos, pero la existencia de anuncios muestra una demanda suficiente para sostener mercado.",
+    "economyNote": "Fuente central para estudiar precio, publicidad, prestigio y circulación comercial del miedo al cáncer.",
+    "reportingNote": "Aquí la fuente no busca describir el cuerpo sino vender esperanza; por eso conviene leerla junto con prensa y registros hospitalarios.",
+    "attachments": [
+      {
+        "label": "Chronicling America",
+        "kind": "source",
+        "url": "https://chroniclingamerica.loc.gov/lccn/sn83030362/1852-08-15/ed-1/seq-3/"
+      }
+    ]
+  },
+  {
+    "id": "ny-herald-1859",
+    "title": "Weekly Mortality Report Listing Cancer of the Breast",
+    "shortTitle": "New York Herald, 1859",
+    "year": 1859,
+    "place": "Nueva York",
+    "language": "inglés",
+    "recordType": "prensa / mortalidad",
+    "status": "parcial",
+    "sourceHost": "Chronicling America",
+    "scope": "nota de prensa",
+    "researchLenses": [
+      "frecuencia",
+      "lugares",
+      "reporte"
+    ],
+    "historicalTerms": [
+      "mortality",
+      "board of health",
+      "cause of death",
+      "cancer of the breast"
+    ],
+    "description": "Tabla periodística de mortalidad donde el cáncer de mama ya figura como causa de muerte diferenciada en la esfera pública urbana.",
+    "howDescribed": "Aparece como categoría de muerte en reporte administrativo reproducido por la prensa.",
+    "treatmentNote": "No detalla tratamiento; sirve para ver cuándo y cómo la enfermedad se vuelve contable.",
+    "actorsNote": "Juntas de salud, periodistas y lectores urbanos.",
+    "patientNote": "La individualidad de la paciente desaparece y se convierte en una entrada estadística.",
+    "frequencyNote": "Permite seguir frecuencia semanal o comparativa si se construye serie con más números del periódico.",
+    "economyNote": "Integra el cáncer en la infraestructura administrativa de ciudad, salud y publicación periódica.",
+    "reportingNote": "Es clave para estudiar el paso de caso clínico a dato poblacional.",
+    "attachments": [
+      {
+        "label": "Chronicling America",
+        "kind": "source",
+        "url": "https://chroniclingamerica.loc.gov/lccn/sn83030313/1859-10-19/ed-1/seq-5/"
+      }
+    ]
+  },
+  {
+    "id": "velpeau-1856",
+    "title": "A Treatise on Cancer of the Breast and of the Mammary Region",
+    "shortTitle": "Velpeau, 1856",
+    "year": 1856,
+    "place": "París / Filadelfia",
+    "language": "inglés",
+    "recordType": "tratado quirúrgico",
+    "status": "pendiente",
+    "sourceHost": "Internet Archive",
+    "scope": "obra",
+    "researchLenses": [
+      "nomenclatura",
+      "tratamiento",
+      "lugares"
+    ],
+    "historicalTerms": [
+      "cancer of the breast",
+      "mammary region",
+      "operation"
+    ],
+    "description": "Tratado de referencia para ampliar el corpus francés e internacional de mediados del siglo XIX.",
+    "howDescribed": "Organiza el cáncer dentro de una patología regional de la mama y sus extensiones vecinas.",
+    "treatmentNote": "Promete material para comparar cirugía, historia natural y extensión regional del mal.",
+    "actorsNote": "Cirujanos hospitalarios y traductores médicos.",
+    "patientNote": "Útil para contrastar lenguaje francés y anglosajón sobre mama y región mamaria.",
+    "frequencyNote": "Pendiente de extracción fina.",
+    "economyNote": "Pendiente de extracción fina.",
+    "reportingNote": "Está localizado y con OCR disponible, pero requiere lectura sistemática.",
+    "attachments": [
+      {
+        "label": "OCR local",
+        "kind": "ocr",
+        "url": "/raw/ocr/velpeau-1856.txt",
+        "remoteUrl": "https://archive.org/download/treatiseoncancer00velp/treatiseoncancer00velp_djvu.txt",
+        "download": true
+      },
+      {
+        "label": "Internet Archive",
+        "kind": "source",
+        "url": "https://archive.org/details/treatiseoncancer00velp"
+      }
+    ]
+  },
+  {
+    "id": "bryant-1887",
+    "title": "The Diseases of the Breast",
+    "shortTitle": "Bryant, 1887",
+    "year": 1887,
+    "place": "Londres",
+    "language": "inglés",
+    "recordType": "manual quirúrgico",
+    "status": "pendiente",
+    "sourceHost": "Internet Archive",
+    "scope": "obra",
+    "researchLenses": [
+      "nomenclatura",
+      "tratamiento",
+      "reporte"
+    ],
+    "historicalTerms": [
+      "diseases of the breast",
+      "operation",
+      "diagnosis"
+    ],
+    "description": "Punto de apoyo para la fase tardía del siglo XIX, cuando la clasificación y la cirugía se vuelven más institucionales.",
+    "howDescribed": "Aún pendiente de lectura fina, pero es útil como puente entre Cooper/Birkett y los registros hospitalarios de fin de siglo.",
+    "treatmentNote": "Se espera encontrar una cirugía más estandarizada y lenguaje más cercano a la patología moderna.",
+    "actorsNote": "Cirujanos hospitalarios y docentes.",
+    "patientNote": "Puede servir para medir qué datos del caso se vuelven rutinarios antes de 1900.",
+    "frequencyNote": "Pendiente de extracción fina.",
+    "economyNote": "Pendiente de extracción fina.",
+    "reportingNote": "Ya está localizado y descargable para lectura posterior.",
+    "attachments": [
+      {
+        "label": "OCR local",
+        "kind": "ocr",
+        "url": "/raw/ocr/bryant-1887.txt",
+        "remoteUrl": "https://archive.org/download/diseasesofbreast00brya/diseasesofbreast00brya_djvu.txt",
+        "download": true
+      },
+      {
+        "label": "Internet Archive",
+        "kind": "source",
+        "url": "https://archive.org/details/diseasesofbreast00brya"
+      }
+    ]
+  },
+  {
+    "id": "halsted-1894",
+    "title": "The Results of Operations for the Cure of Cancer of the Breast Performed at the Johns Hopkins Hospital",
+    "shortTitle": "Halsted, 1894",
+    "year": 1894,
+    "place": "Baltimore",
+    "language": "inglés",
+    "recordType": "artículo médico",
+    "status": "parcial",
+    "sourceHost": "Wellcome Collection",
+    "scope": "artículo",
+    "researchLenses": [
+      "tratamiento",
+      "frecuencia",
+      "actores",
+      "reporte"
+    ],
+    "historicalTerms": [
+      "operation",
+      "cure",
+      "hospital series",
+      "breast cancer"
+    ],
+    "description": "Serie hospitalaria decisiva para estudiar la consolidación de la mastectomía radical y la autoridad de la estadística operatoria.",
+    "howDescribed": "El cáncer de mama se vuelve objeto de serie institucional, comparación de resultados y justificación técnica de operaciones extensas.",
+    "treatmentNote": "Central para reconstruir el paso hacia la cirugía radical y la noción de resultado terapéutico medible.",
+    "actorsNote": "Hospital, cirujano estrella, pacientes convertidas en serie operatoria.",
+    "patientNote": "La paciente individual se subordina a la cohorte; útil para contrastar con el caso narrativo decimonónico anterior.",
+    "frequencyNote": "Organiza resultados en serie, no solo casos aislados.",
+    "economyNote": "Muestra el peso institucional y de prestigio de un hospital universitario en la definición del tratamiento legítimo.",
+    "reportingNote": "Es una fuente sobre poder de la estadística clínica más que sobre experiencia íntima.",
+    "attachments": [
+      {
+        "label": "Wellcome Collection",
+        "kind": "source",
+        "url": "https://wellcomecollection.org/works/g5xhvcw7"
+      }
+    ]
+  },
+  {
+    "id": "nunn-1899",
+    "title": "Cancer: Illustrated by One Thousand Cases from the Registers of the Middlesex Hospital and by Fifty Selected Cases of Cancer of the Breast",
+    "shortTitle": "Nunn, 1899",
+    "year": 1899,
+    "place": "Londres",
+    "language": "inglés",
+    "recordType": "registro hospitalario",
+    "status": "leido",
+    "sourceHost": "Internet Archive",
+    "scope": "obra",
+    "researchLenses": [
+      "frecuencia",
+      "lugares",
+      "pacientes",
+      "reporte",
+      "actores"
+    ],
+    "historicalTerms": [
+      "registers",
+      "age liability",
+      "regional frequency",
+      "places of birth",
+      "selected cases"
+    ],
+    "description": "Libro fundamental para pasar de ejemplos individuales a infraestructura de registro, geografía y frecuencia hospitalaria.",
+    "howDescribed": "Presenta el cáncer como entidad registrable por edad, región corporal, lugar de nacimiento y series institucionales.",
+    "treatmentNote": "Más que prescribir un único tratamiento, organiza el archivo de casos y su lectura epidemiológica y patológica.",
+    "actorsNote": "Registrars, pathologists, hospital staff y cirujanos producen el archivo; la paciente entra como expediente clasificable.",
+    "patientNote": "Sirve para rastrear edad, distribución geográfica, focos de metástasis y series de casos mamarios seleccionados.",
+    "frequencyNote": "Trabaja con 1,000 casos hospitalarios y tablas de edad y lugar de nacimiento para pensar susceptibilidad y distribución.",
+    "economyNote": "El archivo hospitalario se vuelve recurso institucional de legitimidad científica y acumulación de prestigio.",
+    "reportingNote": "Es ideal para estudiar qué variables decide conservar un hospital y cuáles se pierden.",
+    "attachments": [
+      {
+        "label": "OCR local",
+        "kind": "ocr",
+        "url": "/raw/ocr/nunn-1899.txt",
+        "remoteUrl": "https://archive.org/download/b20393453/b20393453_djvu.txt",
+        "download": true
+      },
+      {
+        "label": "Internet Archive",
+        "kind": "source",
+        "url": "https://archive.org/details/b20393453"
+      }
+    ]
+  },
+  {
+    "id": "nunn-case-shuttleworth",
+    "title": "Case I: Catherine Shuttleworth",
+    "shortTitle": "Middlesex case, 1862/1899",
+    "year": 1862,
+    "place": "Londres",
+    "language": "inglés",
+    "recordType": "caso clínico",
+    "status": "leido",
+    "sourceHost": "Middlesex Hospital / Internet Archive",
+    "scope": "caso",
+    "researchLenses": [
+      "pacientes",
+      "temporalidad",
+      "tratamiento",
+      "reporte"
+    ],
+    "historicalTerms": [
+      "out-patient",
+      "sloughing",
+      "axillary glands",
+      "right breast",
+      "extension"
+    ],
+    "description": "Caso individual extraído del libro de Nunn. Permite ver cronología, edad, lado afectado y progresión anatómica con detalle.",
+    "howDescribed": "Masa en pecho derecho, roja, poco dolorosa al inicio, con dieciocho meses de formación antes de ulceración y destrucción local.",
+    "treatmentNote": "La fuente sigue evolución más que una cura exitosa; culmina en muerte tras extensión contralateral y ganglionar.",
+    "actorsNote": "Paciente ambulatoria, médicos del hospital y patólogos que registran el post-mortem.",
+    "patientNote": "Catherine Shuttleworth, 53 años; el caso conserva duración, comorbilidades y evolución anatómica.",
+    "frequencyNote": "No vale por conteo sino por granularidad narrativa dentro de un archivo institucional mayor.",
+    "economyNote": "Muestra el tránsito entre consulta externa e internamiento, es decir, formas de acceso y escalada asistencial.",
+    "reportingNote": "Muy útil para modelar la ficha de captura que quieres construir para otros casos manuscritos.",
+    "attachments": [
+      {
+        "label": "OCR local",
+        "kind": "ocr",
+        "url": "/raw/ocr/nunn-1899.txt",
+        "remoteUrl": "https://archive.org/download/b20393453/b20393453_djvu.txt",
+        "download": true
+      },
+      {
+        "label": "Internet Archive",
+        "kind": "source",
+        "url": "https://archive.org/details/b20393453"
+      }
+    ]
+  }
+]
