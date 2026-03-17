@@ -6,10 +6,10 @@ function ContextNetwork({
   data,
   title,
   subtitle,
-  sectionLabel = 'Visualizacion artistica',
-  emptyMessage = 'No hay suficientes coincidencias para dibujar la red todavia.',
-  hint = 'Arrastra nodos si quieres reorganizar la lectura. La estructura base ya separa terminos y obras para evitar apelmazamiento.',
-  termColumnLabel = 'Terminos',
+  sectionLabel = 'Visualización artística',
+  emptyMessage = 'No hay suficientes coincidencias para dibujar la red todavía.',
+  hint = 'Arrastra nodos si quieres reorganizar la lectura. La estructura base ya separa términos y obras para evitar apelmazamiento.',
+  termColumnLabel = 'Términos',
   recordColumnLabel = 'Obras',
 }) {
   const [containerRef, { width: containerWidth }] = useContainerSize(760, 420)

@@ -30,10 +30,49 @@ const emptyUploadDraft = {
 }
 
 const networkColumnLabels = {
-  es: { terms: 'Terminos', works: 'Obras' },
+  es: { terms: 'Términos', works: 'Obras' },
   en: { terms: 'Terms', works: 'Works' },
   fr: { terms: 'Termes', works: 'Oeuvres' },
   pt: { terms: 'Termos', works: 'Obras' },
+}
+
+const sectionLabels = {
+  es: {
+    nav: 'Navegación',
+    overview: 'Panorama',
+    analysis: 'Análisis',
+    mentions: 'Menciones',
+    workspace: 'Trabajo editorial',
+    sources: 'Fuentes',
+    about: 'Eva',
+  },
+  en: {
+    nav: 'Navigation',
+    overview: 'Overview',
+    analysis: 'Analysis',
+    mentions: 'Mentions',
+    workspace: 'Editorial work',
+    sources: 'Sources',
+    about: 'Eva',
+  },
+  fr: {
+    nav: 'Navigation',
+    overview: 'Vue d’ensemble',
+    analysis: 'Analyse',
+    mentions: 'Mentions',
+    workspace: 'Travail editorial',
+    sources: 'Sources',
+    about: 'Eva',
+  },
+  pt: {
+    nav: 'Navegação',
+    overview: 'Panorama',
+    analysis: 'Análise',
+    mentions: 'Menções',
+    workspace: 'Trabalho editorial',
+    sources: 'Fontes',
+    about: 'Eva',
+  },
 }
 
 async function requestState() {
@@ -47,6 +86,7 @@ async function requestState() {
 
 function App() {
   const [activeLocale, setActiveLocale] = useState('es')
+  const [activeSection, setActiveSection] = useState('overview')
   const [state, setState] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -79,6 +119,35 @@ function App() {
   const copy = uiCopy[activeLocale]
   const localeOptions = ['es', 'en', 'fr', 'pt']
   const networkColumns = networkColumnLabels[activeLocale]
+  const sectionCopy = sectionLabels[activeLocale]
+  const sections = [
+    { id: 'overview', label: sectionCopy.overview },
+    { id: 'analysis', label: sectionCopy.analysis },
+    { id: 'mentions', label: sectionCopy.mentions },
+    { id: 'workspace', label: sectionCopy.workspace },
+    { id: 'sources', label: sectionCopy.sources },
+    { id: 'about', label: sectionCopy.about },
+  ]
+
+  function handleSectionChange(sectionId, anchorId = '') {
+    setActiveSection(sectionId)
+
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    window.setTimeout(() => {
+      if (anchorId) {
+        document.getElementById(anchorId)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+        return
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 70)
+  }
 
   useEffect(() => {
     let ignore = false
@@ -497,772 +566,827 @@ function App() {
         </div>
       </section>
 
-      <section className="study-grid">
-        <article className="study-card">
-          <p className="section-label">{copy.studySectionLabel}</p>
-          <h2>{copy.evaName}</h2>
-          <p className="field-label">{copy.evaBioLabel}</p>
-          <p>{copy.evaBio}</p>
-        </article>
-
-        <article className="study-card">
-          <p className="section-label">{copy.purposeLabel}</p>
-          <h2>{copy.purposeTitle}</h2>
-          <p>{copy.purpose}</p>
-          <div className="study-callout">
-            <p>{copy.uploadCallout}</p>
-            <a href="#upload-workspace" className="secondary-button">
-              {copy.jumpToUpload}
-            </a>
-          </div>
-        </article>
-      </section>
-
-      <section className="band">
-        <div className="band-copy">
-          <p className="section-label">{copy.band.sectionLabel}</p>
-          <h2>{copy.band.title}</h2>
-          <p>{copy.band.text}</p>
-        </div>
-        <div className="band-status">
-          <span className={`status-badge ${loading ? 'status-pendiente' : 'status-leido'}`}>
-            {loading ? copy.band.loading : copy.band.ready}
-          </span>
-          {flash ? <p className="flash-copy">{flash}</p> : null}
-          {error ? <p className="error-copy">{error}</p> : null}
-        </div>
-      </section>
-
-      <section className="algorithm-section">
-        <div className="section-heading">
-          <div>
-            <p className="section-label">{copy.algorithms.sectionLabel}</p>
-            <h2>{copy.algorithms.title}</h2>
-          </div>
-          <p className="section-copy">{copy.algorithms.text}</p>
-        </div>
-
-        <div className="algorithm-grid">
-          {copy.algorithms.cards.map((card, index) => (
-            <article key={`${activeLocale}-${index}`} className="algorithm-card">
-              <p className="algorithm-tier">{card.tier}</p>
-              <h3>{card.title}</h3>
-              <p>{card.description}</p>
-            </article>
+      <nav className="section-nav-panel" aria-label={sectionCopy.nav}>
+        <p className="section-label">{sectionCopy.nav}</p>
+        <div className="section-nav-grid">
+          {sections.map((section, index) => (
+            <button
+              key={section.id}
+              type="button"
+              className={`section-nav-button ${
+                activeSection === section.id ? 'is-active' : ''
+              }`}
+              onClick={() => handleSectionChange(section.id)}
+              aria-pressed={activeSection === section.id}
+            >
+              <span className="nav-kicker">{String(index + 1).padStart(2, '0')}</span>
+              <strong>{section.label}</strong>
+            </button>
           ))}
         </div>
+      </nav>
+
+      <section className="status-strip">
+        <span className={`status-badge ${loading ? 'status-pendiente' : 'status-leido'}`}>
+          {loading ? copy.band.loading : copy.band.ready}
+        </span>
+        {flash ? <p className="flash-copy">{flash}</p> : null}
+        {error ? <p className="error-copy">{error}</p> : null}
       </section>
 
-      <section className="controls-panel">
-        <div className="section-heading">
-          <div>
-            <p className="section-label">{copy.controls.sectionLabel}</p>
-            <h2>{copy.controls.title}</h2>
-          </div>
-          <p className="section-copy">{copy.controls.text}</p>
-        </div>
+      {activeSection === 'overview' ? (
+        <>
+          <section className="study-grid study-grid-single">
+            <article className="study-card">
+              <p className="section-label">{copy.purposeLabel}</p>
+              <h2>{copy.purposeTitle}</h2>
+              <p>{copy.purpose}</p>
+              <div className="study-callout">
+                <p>{copy.uploadCallout}</p>
+                <button
+                  type="button"
+                  className="secondary-button"
+                  onClick={() => handleSectionChange('workspace', 'upload-workspace')}
+                >
+                  {copy.jumpToUpload}
+                </button>
+              </div>
+            </article>
+          </section>
 
-        <div className="filters-grid">
-          <label>
-            <span className="field-label">{copy.controls.queryLabel}</span>
-            <input
-              className="search-input"
-              type="text"
-              value={filters.query}
-              onChange={(event) =>
-                setFilters((current) => ({ ...current, query: event.target.value }))
-              }
-              placeholder={copy.controls.queryPlaceholder}
-            />
-          </label>
-
-          <label>
-            <span className="field-label">{copy.controls.configuredTerm}</span>
-            <select
-              value={filters.termId}
-              onChange={(event) =>
-                setFilters((current) => ({ ...current, termId: event.target.value }))
-              }
-            >
-              <option value="todos">{copy.controls.all}</option>
-              {terms.map((term) => (
-                <option key={term.id} value={term.id}>
-                  {term.canonical}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label>
-            <span className="field-label">{copy.controls.category}</span>
-            <select
-              value={filters.category}
-              onChange={(event) =>
-                setFilters((current) => ({ ...current, category: event.target.value }))
-              }
-            >
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label>
-            <span className="field-label">{copy.controls.sourceType}</span>
-            <select
-              value={filters.recordType}
-              onChange={(event) =>
-                setFilters((current) => ({ ...current, recordType: event.target.value }))
-              }
-            >
-              {recordTypes.map((recordType) => (
-                <option key={recordType} value={recordType}>
-                  {recordType}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label>
-            <span className="field-label">{copy.controls.reviewStatus}</span>
-            <select
-              value={filters.reviewStatus}
-              onChange={(event) =>
-                setFilters((current) => ({ ...current, reviewStatus: event.target.value }))
-              }
-            >
-              {reviewStatuses.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        <div className="chip-row">
-          <span className="chip chip-accent">
-            {filteredMentions.length} {copy.controls.visibleMentions}
-          </span>
-          <span className="chip">
-            {filteredDocuments.length} {copy.controls.connectedDocuments}
-          </span>
-          <span className="chip">
-            {cooccurrenceItems.length} {copy.controls.cooccurrencePairs}
-          </span>
-        </div>
-      </section>
-
-      <section className="visual-grid">
-        <TimelineChart
-          data={timelineData}
-          sectionLabel={copy.algorithms.sectionLabel}
-          title={copy.visuals.timelineTitle}
-          subtitle={copy.visuals.timelineSubtitle}
-          totalLabel={copy.visuals.timelineTotalLabel}
-          matchedLabel={copy.visuals.timelineMatchedLabel}
-          hint={copy.visuals.chartHint}
-        />
-
-        <SearchResultsChart
-          sectionLabel={copy.algorithms.sectionLabel}
-          title={copy.visuals.topTermsTitle}
-          subtitle={copy.visuals.topTermsSubtitle}
-          metricLabel={copy.visuals.topTermsMetric}
-          items={topTermItems}
-          hint={copy.visuals.chartHint}
-        />
-      </section>
-
-      <section className="visual-grid visual-grid-bottom">
-        <SearchResultsChart
-          title={copy.visuals.cooccurrenceTitle}
-          subtitle={copy.visuals.cooccurrenceSubtitle}
-          metricLabel={copy.visuals.cooccurrenceMetric}
-          sectionLabel={copy.algorithms.sectionLabel}
-          items={cooccurrenceItems.map((entry) => ({
-            id: entry.id,
-            label: `${entry.sourceLabel} + ${entry.targetLabel}`,
-            value: entry.value,
-          }))}
-          hint={copy.visuals.chartHint}
-        />
-
-        <div className="summary-card">
-          <p className="section-label">{copy.visuals.summaryLabel}</p>
-          <h3>{copy.visuals.summaryTitle}</h3>
-          <ul className="evidence-list">
-            {cooccurrenceItems.slice(0, 6).map((entry) => (
-              <li key={entry.id}>
-                <strong>
-                  {entry.sourceLabel} + {entry.targetLabel}
-                </strong>
-                <span>
-                  {entry.value} {copy.visuals.sharedFragments}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <div className="network-row">
-        <ContextNetwork
-          data={networkData}
-          sectionLabel={copy.algorithms.sectionLabel}
-          title={copy.visuals.networkTitle}
-          subtitle={copy.visuals.networkSubtitle}
-          emptyMessage={copy.visuals.networkEmpty}
-          hint={copy.visuals.networkHint}
-          termColumnLabel={networkColumns.terms}
-          recordColumnLabel={networkColumns.works}
-        />
-      </div>
-
-      <section className="archive-layout">
-        <div className="list-panel">
-          <div className="list-heading">
-            <div>
-              <p className="section-label">{copy.mentions.sectionLabel}</p>
-              <h2>{copy.mentions.title}</h2>
+          <section className="band">
+            <div className="band-copy">
+              <p className="section-label">{copy.band.sectionLabel}</p>
+              <h2>{copy.band.title}</h2>
+              <p>{copy.band.text}</p>
             </div>
-            <p className="list-summary">{copy.mentions.summary}</p>
+          </section>
+
+          <section className="algorithm-section">
+            <div className="section-heading">
+              <div>
+                <p className="section-label">{copy.algorithms.sectionLabel}</p>
+                <h2>{copy.algorithms.title}</h2>
+              </div>
+              <p className="section-copy">{copy.algorithms.text}</p>
+            </div>
+
+            <div className="algorithm-grid">
+              {copy.algorithms.cards.map((card, index) => (
+                <article key={`${activeLocale}-${index}`} className="algorithm-card">
+                  <p className="algorithm-tier">{card.tier}</p>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </>
+      ) : null}
+
+      {activeSection === 'analysis' ? (
+        <>
+          <section className="controls-panel">
+            <div className="section-heading">
+              <div>
+                <p className="section-label">{copy.controls.sectionLabel}</p>
+                <h2>{copy.controls.title}</h2>
+              </div>
+              <p className="section-copy">{copy.controls.text}</p>
+            </div>
+
+            <div className="filters-grid">
+              <label>
+                <span className="field-label">{copy.controls.queryLabel}</span>
+                <input
+                  className="search-input"
+                  type="text"
+                  value={filters.query}
+                  onChange={(event) =>
+                    setFilters((current) => ({ ...current, query: event.target.value }))
+                  }
+                  placeholder={copy.controls.queryPlaceholder}
+                />
+              </label>
+
+              <label>
+                <span className="field-label">{copy.controls.configuredTerm}</span>
+                <select
+                  value={filters.termId}
+                  onChange={(event) =>
+                    setFilters((current) => ({ ...current, termId: event.target.value }))
+                  }
+                >
+                  <option value="todos">{copy.controls.all}</option>
+                  {terms.map((term) => (
+                    <option key={term.id} value={term.id}>
+                      {term.canonical}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label>
+                <span className="field-label">{copy.controls.category}</span>
+                <select
+                  value={filters.category}
+                  onChange={(event) =>
+                    setFilters((current) => ({ ...current, category: event.target.value }))
+                  }
+                >
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label>
+                <span className="field-label">{copy.controls.sourceType}</span>
+                <select
+                  value={filters.recordType}
+                  onChange={(event) =>
+                    setFilters((current) => ({ ...current, recordType: event.target.value }))
+                  }
+                >
+                  {recordTypes.map((recordType) => (
+                    <option key={recordType} value={recordType}>
+                      {recordType}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label>
+                <span className="field-label">{copy.controls.reviewStatus}</span>
+                <select
+                  value={filters.reviewStatus}
+                  onChange={(event) =>
+                    setFilters((current) => ({ ...current, reviewStatus: event.target.value }))
+                  }
+                >
+                  {reviewStatuses.map((status) => (
+                    <option key={status} value={status}>
+                      {status}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <div className="chip-row">
+              <span className="chip chip-accent">
+                {filteredMentions.length} {copy.controls.visibleMentions}
+              </span>
+              <span className="chip">
+                {filteredDocuments.length} {copy.controls.connectedDocuments}
+              </span>
+              <span className="chip">
+                {cooccurrenceItems.length} {copy.controls.cooccurrencePairs}
+              </span>
+            </div>
+          </section>
+
+          <section className="visual-grid">
+            <TimelineChart
+              data={timelineData}
+              sectionLabel={copy.algorithms.sectionLabel}
+              title={copy.visuals.timelineTitle}
+              subtitle={copy.visuals.timelineSubtitle}
+              totalLabel={copy.visuals.timelineTotalLabel}
+              matchedLabel={copy.visuals.timelineMatchedLabel}
+              hint={copy.visuals.chartHint}
+            />
+
+            <SearchResultsChart
+              sectionLabel={copy.algorithms.sectionLabel}
+              title={copy.visuals.topTermsTitle}
+              subtitle={copy.visuals.topTermsSubtitle}
+              metricLabel={copy.visuals.topTermsMetric}
+              items={topTermItems}
+              hint={copy.visuals.chartHint}
+            />
+          </section>
+
+          <section className="visual-grid visual-grid-bottom">
+            <SearchResultsChart
+              title={copy.visuals.cooccurrenceTitle}
+              subtitle={copy.visuals.cooccurrenceSubtitle}
+              metricLabel={copy.visuals.cooccurrenceMetric}
+              sectionLabel={copy.algorithms.sectionLabel}
+              items={cooccurrenceItems.map((entry) => ({
+                id: entry.id,
+                label: `${entry.sourceLabel} + ${entry.targetLabel}`,
+                value: entry.value,
+              }))}
+              hint={copy.visuals.chartHint}
+            />
+
+            <div className="summary-card">
+              <p className="section-label">{copy.visuals.summaryLabel}</p>
+              <h3>{copy.visuals.summaryTitle}</h3>
+              <ul className="evidence-list">
+                {cooccurrenceItems.slice(0, 6).map((entry) => (
+                  <li key={entry.id}>
+                    <strong>
+                      {entry.sourceLabel} + {entry.targetLabel}
+                    </strong>
+                    <span>
+                      {entry.value} {copy.visuals.sharedFragments}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          <div className="network-row">
+            <ContextNetwork
+              data={networkData}
+              sectionLabel={copy.algorithms.sectionLabel}
+              title={copy.visuals.networkTitle}
+              subtitle={copy.visuals.networkSubtitle}
+              emptyMessage={copy.visuals.networkEmpty}
+              hint={copy.visuals.networkHint}
+              termColumnLabel={networkColumns.terms}
+              recordColumnLabel={networkColumns.works}
+            />
           </div>
+        </>
+      ) : null}
 
-          <div className="record-list">
-            {filteredMentions.slice(0, 24).map((mention) => (
-              <button
-                key={mention.id}
-                type="button"
-                className={`record-card ${
-                  mention.id === selectedMentionId ? 'is-active' : ''
-                }`}
-                onClick={() => setSelectedMentionId(mention.id)}
-              >
-                <div className="record-card-top">
-                  <span className="record-year">{mention.year}</span>
-                  <span className="status-badge status-parcial">{mention.recordType}</span>
-                </div>
-                <h3>{mention.documentTitle}</h3>
-                <p className="record-type">
-                  {mention.canonicalTerm} · {mention.place}
-                </p>
-                <p className="record-snippet">{mention.snippet}</p>
-              </button>
-            ))}
+      {activeSection === 'mentions' ? (
+        <section className="archive-layout">
+          <div className="list-panel">
+            <div className="list-heading">
+              <div>
+                <p className="section-label">{copy.mentions.sectionLabel}</p>
+                <h2>{copy.mentions.title}</h2>
+              </div>
+              <p className="list-summary">{copy.mentions.summary}</p>
+            </div>
 
-            {!filteredMentions.length ? (
-              <div className="empty-card">{copy.mentions.empty}</div>
-            ) : null}
-          </div>
-        </div>
-
-        <aside className="detail-panel">
-          <div className="detail-block">
-            <p className="section-label">{copy.mentions.activeLabel}</p>
-            <h3>{activeMention ? activeMention.documentTitle : copy.mentions.noSelection}</h3>
-            {activeMention ? (
-              <>
-                <p className="detail-meta">
-                  {activeMention.canonicalTerm} · {activeMention.year} · {activeMention.place}
-                </p>
-                <p>{activeMention.snippet}</p>
-              </>
-            ) : (
-              <p>{copy.mentions.noActive}</p>
-            )}
-          </div>
-
-          <div className="detail-block">
-            <p className="section-label">{copy.mentions.similarLabel}</p>
-            <h3>{copy.mentions.similarTitle}</h3>
-            <p className="context-note">{copy.mentions.similarNote}</p>
-
-            {similarLoading ? <p className="loading-copy">{copy.mentions.comparing}</p> : null}
-
-            <div className="context-list">
-              {similarPayload.similarContexts.map((context) => (
-                <article key={context.chunkId} className="context-card">
-                  <div className="snippet-meta">
-                    <span>{context.documentTitle}</span>
-                    <span>{context.year}</span>
-                    <span>{context.score.toFixed(2)}</span>
+            <div className="record-list">
+              {filteredMentions.slice(0, 24).map((mention) => (
+                <button
+                  key={mention.id}
+                  type="button"
+                  className={`record-card ${
+                    mention.id === selectedMentionId ? 'is-active' : ''
+                  }`}
+                  onClick={() => setSelectedMentionId(mention.id)}
+                >
+                  <div className="record-card-top">
+                    <span className="record-year">{mention.year}</span>
+                    <span className="status-badge status-parcial">{mention.recordType}</span>
                   </div>
-                  <p>{context.snippet}</p>
+                  <h3>{mention.documentTitle}</h3>
+                  <p className="record-type">
+                    {mention.canonicalTerm} · {mention.place}
+                  </p>
+                  <p className="record-snippet">{mention.snippet}</p>
+                </button>
+              ))}
+
+              {!filteredMentions.length ? (
+                <div className="empty-card">{copy.mentions.empty}</div>
+              ) : null}
+            </div>
+          </div>
+
+          <aside className="detail-panel">
+            <div className="detail-block">
+              <p className="section-label">{copy.mentions.activeLabel}</p>
+              <h3>{activeMention ? activeMention.documentTitle : copy.mentions.noSelection}</h3>
+              {activeMention ? (
+                <>
+                  <p className="detail-meta">
+                    {activeMention.canonicalTerm} · {activeMention.year} · {activeMention.place}
+                  </p>
+                  <p>{activeMention.snippet}</p>
+                </>
+              ) : (
+                <p>{copy.mentions.noActive}</p>
+              )}
+            </div>
+
+            <div className="detail-block">
+              <p className="section-label">{copy.mentions.similarLabel}</p>
+              <h3>{copy.mentions.similarTitle}</h3>
+              <p className="context-note">{copy.mentions.similarNote}</p>
+
+              {similarLoading ? <p className="loading-copy">{copy.mentions.comparing}</p> : null}
+
+              <div className="context-list">
+                {similarPayload.similarContexts.map((context) => (
+                  <article key={context.chunkId} className="context-card">
+                    <div className="snippet-meta">
+                      <span>{context.documentTitle}</span>
+                      <span>{context.year}</span>
+                      <span>{context.score.toFixed(2)}</span>
+                    </div>
+                    <p>{context.snippet}</p>
+                    <div className="chip-row">
+                      {context.termLabels.map((label) => (
+                        <span key={label} className="chip">
+                          {label}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+                {!similarLoading && !similarPayload.similarContexts.length ? (
+                  <p className="context-note">{copy.mentions.noNeighbors}</p>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="detail-block">
+              <p className="section-label">{copy.mentions.evaLabLabel}</p>
+              <h3>{copy.mentions.evaLabTitle}</h3>
+              <form className="stack-form" onSubmit={handleManualContextSubmit}>
+                <label>
+                  <span className="field-label">{copy.mentions.evaLabField}</span>
+                  <textarea
+                    rows="5"
+                    value={manualContext}
+                    onChange={(event) => setManualContext(event.target.value)}
+                    placeholder={copy.mentions.evaLabPlaceholder}
+                  />
+                </label>
+                <button type="submit" className="primary-button" disabled={manualLoading}>
+                  {manualLoading
+                    ? copy.mentions.evaLabButtonLoading
+                    : copy.mentions.evaLabButton}
+                </button>
+              </form>
+
+              <div className="context-list">
+                {manualPayload.similarContexts.map((context) => (
+                  <article key={context.chunkId} className="context-card">
+                    <div className="snippet-meta">
+                      <span>{context.documentTitle}</span>
+                      <span>{context.year}</span>
+                      <span>{context.score.toFixed(2)}</span>
+                    </div>
+                    <p>{context.snippet}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </aside>
+        </section>
+      ) : null}
+
+      {activeSection === 'workspace' ? (
+        <section className="workspace-grid">
+          <div className="workspace-card">
+            <div className="section-heading">
+              <div>
+                <p className="section-label">{copy.lexicon.sectionLabel}</p>
+                <h2>{copy.lexicon.title}</h2>
+              </div>
+              <p className="section-copy">{copy.lexicon.text}</p>
+            </div>
+
+            <div className="term-grid">
+              {terms.map((term) => (
+                <article key={term.id} className="term-card">
+                  <div className="term-card-head">
+                    <div>
+                      <p className="term-category">{term.category}</p>
+                      <h3>{term.canonical}</h3>
+                    </div>
+                    <button
+                      type="button"
+                      className="secondary-button"
+                      onClick={() => {
+                        setTermMode('edit')
+                        setTermDraft({
+                          id: term.id,
+                          canonical: term.canonical,
+                          variants: term.variants.join(', '),
+                          category: term.category,
+                          notes: term.notes ?? '',
+                        })
+                      }}
+                    >
+                      {copy.lexicon.editButton}
+                    </button>
+                  </div>
+                  <p>{term.notes || copy.lexicon.noMethodNote}</p>
                   <div className="chip-row">
-                    {context.termLabels.map((label) => (
-                      <span key={label} className="chip">
-                        {label}
+                    {term.variants.map((variant) => (
+                      <span key={variant} className="chip">
+                        {variant}
                       </span>
                     ))}
                   </div>
                 </article>
               ))}
-              {!similarLoading && !similarPayload.similarContexts.length ? (
-                <p className="context-note">{copy.mentions.noNeighbors}</p>
-              ) : null}
             </div>
-          </div>
 
-          <div className="detail-block">
-            <p className="section-label">{copy.mentions.evaLabLabel}</p>
-            <h3>{copy.mentions.evaLabTitle}</h3>
-            <form className="stack-form" onSubmit={handleManualContextSubmit}>
+            <form className="workspace-form" onSubmit={handleTermSubmit}>
+              <div className="form-head">
+                <h3>{termMode === 'edit' ? copy.lexicon.editTitle : copy.lexicon.newTitle}</h3>
+                {termMode === 'edit' ? (
+                  <button
+                    type="button"
+                    className="ghost-button"
+                    onClick={() => {
+                      setTermDraft(emptyTermDraft)
+                      setTermMode('new')
+                    }}
+                  >
+                    {copy.lexicon.cancelEdit}
+                  </button>
+                ) : null}
+              </div>
+
+              <div className="form-grid">
+                <label>
+                  <span className="field-label">{copy.lexicon.canonical}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={termDraft.canonical}
+                    onChange={(event) =>
+                      setTermDraft((current) => ({
+                        ...current,
+                        canonical: event.target.value,
+                      }))
+                    }
+                    placeholder="scirrhus of the breast"
+                  />
+                </label>
+
+                <label>
+                  <span className="field-label">{copy.lexicon.category}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={termDraft.category}
+                    onChange={(event) =>
+                      setTermDraft((current) => ({
+                        ...current,
+                        category: event.target.value,
+                      }))
+                    }
+                    placeholder="nomenclatura histórica"
+                  />
+                </label>
+              </div>
+
               <label>
-                <span className="field-label">{copy.mentions.evaLabField}</span>
+                <span className="field-label">{copy.lexicon.variants}</span>
                 <textarea
-                  rows="5"
-                  value={manualContext}
-                  onChange={(event) => setManualContext(event.target.value)}
-                  placeholder={copy.mentions.evaLabPlaceholder}
+                  rows="4"
+                  value={termDraft.variants}
+                  onChange={(event) =>
+                    setTermDraft((current) => ({
+                      ...current,
+                      variants: event.target.value,
+                    }))
+                  }
+                  placeholder={copy.lexicon.variantsPlaceholder}
                 />
               </label>
-              <button type="submit" className="primary-button" disabled={manualLoading}>
-                {manualLoading
-                  ? copy.mentions.evaLabButtonLoading
-                  : copy.mentions.evaLabButton}
+
+              <label>
+                <span className="field-label">{copy.lexicon.notes}</span>
+                <textarea
+                  rows="3"
+                  value={termDraft.notes}
+                  onChange={(event) =>
+                    setTermDraft((current) => ({
+                      ...current,
+                      notes: event.target.value,
+                    }))
+                  }
+                  placeholder={copy.lexicon.notesPlaceholder}
+                />
+              </label>
+
+              <button type="submit" className="primary-button" disabled={termSaving}>
+                {termSaving
+                  ? copy.lexicon.saving
+                  : termMode === 'edit'
+                    ? copy.lexicon.saveEdit
+                    : copy.lexicon.saveNew}
               </button>
             </form>
+          </div>
 
-            <div className="context-list">
-              {manualPayload.similarContexts.map((context) => (
-                <article key={context.chunkId} className="context-card">
-                  <div className="snippet-meta">
-                    <span>{context.documentTitle}</span>
-                    <span>{context.year}</span>
-                    <span>{context.score.toFixed(2)}</span>
+          <div className="workspace-card" id="upload-workspace">
+            <div className="section-heading">
+              <div>
+                <p className="section-label">{copy.upload.sectionLabel}</p>
+                <h2>{copy.upload.title}</h2>
+              </div>
+              <p className="section-copy">{copy.upload.text}</p>
+            </div>
+
+            <form className="workspace-form" onSubmit={handleUploadSubmit}>
+              <div className="form-grid form-grid-wide">
+                <label>
+                  <span className="field-label">{copy.upload.fieldTitle}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={uploadDraft.title}
+                    onChange={(event) =>
+                      setUploadDraft((current) => ({
+                        ...current,
+                        title: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+
+                <label>
+                  <span className="field-label">{copy.upload.shortTitle}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={uploadDraft.shortTitle}
+                    onChange={(event) =>
+                      setUploadDraft((current) => ({
+                        ...current,
+                        shortTitle: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+
+                <label>
+                  <span className="field-label">{copy.upload.year}</span>
+                  <input
+                    className="search-input"
+                    type="number"
+                    value={uploadDraft.year}
+                    onChange={(event) =>
+                      setUploadDraft((current) => ({
+                        ...current,
+                        year: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+
+                <label>
+                  <span className="field-label">{copy.upload.place}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={uploadDraft.place}
+                    onChange={(event) =>
+                      setUploadDraft((current) => ({
+                        ...current,
+                        place: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+
+                <label>
+                  <span className="field-label">{copy.upload.language}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={uploadDraft.language}
+                    onChange={(event) =>
+                      setUploadDraft((current) => ({
+                        ...current,
+                        language: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+
+                <label>
+                  <span className="field-label">{copy.upload.recordType}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={uploadDraft.recordType}
+                    onChange={(event) =>
+                      setUploadDraft((current) => ({
+                        ...current,
+                        recordType: event.target.value,
+                      }))
+                    }
+                    placeholder={copy.upload.recordTypePlaceholder}
+                  />
+                </label>
+
+                <label>
+                  <span className="field-label">{copy.upload.sourceHost}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={uploadDraft.sourceHost}
+                    onChange={(event) =>
+                      setUploadDraft((current) => ({
+                        ...current,
+                        sourceHost: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+
+                <label>
+                  <span className="field-label">{copy.upload.contributorName}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={uploadDraft.contributorName}
+                    onChange={(event) =>
+                      setUploadDraft((current) => ({
+                        ...current,
+                        contributorName: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+
+                <label>
+                  <span className="field-label">{copy.upload.contributorRole}</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    value={uploadDraft.contributorRole}
+                    onChange={(event) =>
+                      setUploadDraft((current) => ({
+                        ...current,
+                        contributorRole: event.target.value,
+                      }))
+                    }
+                    placeholder={copy.upload.contributorRolePlaceholder}
+                  />
+                </label>
+
+                <label className="file-field">
+                  <span className="field-label">{copy.upload.file}</span>
+                  <input
+                    type="file"
+                    onChange={(event) => setUploadFile(event.target.files?.[0] ?? null)}
+                  />
+                </label>
+              </div>
+
+              <label>
+                <span className="field-label">{copy.upload.summary}</span>
+                <textarea
+                  rows="3"
+                  value={uploadDraft.summary}
+                  onChange={(event) =>
+                    setUploadDraft((current) => ({
+                      ...current,
+                      summary: event.target.value,
+                    }))
+                  }
+                  placeholder={copy.upload.summaryPlaceholder}
+                />
+              </label>
+
+              <label>
+                <span className="field-label">{copy.upload.notes}</span>
+                <textarea
+                  rows="3"
+                  value={uploadDraft.notes}
+                  onChange={(event) =>
+                    setUploadDraft((current) => ({
+                      ...current,
+                      notes: event.target.value,
+                    }))
+                  }
+                  placeholder={copy.upload.notesPlaceholder}
+                />
+              </label>
+
+              <label>
+                <span className="field-label">{copy.upload.ocrText}</span>
+                <textarea
+                  rows="7"
+                  value={uploadDraft.ocrText}
+                  onChange={(event) =>
+                    setUploadDraft((current) => ({
+                      ...current,
+                      ocrText: event.target.value,
+                    }))
+                  }
+                  placeholder={copy.upload.ocrPlaceholder}
+                />
+              </label>
+
+              <button type="submit" className="primary-button" disabled={uploading}>
+                {uploading ? copy.upload.submitting : copy.upload.submit}
+              </button>
+            </form>
+          </div>
+        </section>
+      ) : null}
+
+      {activeSection === 'sources' ? (
+        <>
+          <section className="documents-section">
+            <div className="section-heading">
+              <div>
+                <p className="section-label">{copy.connected.sectionLabel}</p>
+                <h2>{copy.connected.title}</h2>
+              </div>
+              <p className="section-copy">{copy.connected.text}</p>
+            </div>
+
+            <div className="document-grid">
+              {filteredDocuments.slice(0, 12).map((document) => (
+                <article key={document.id} className="document-card">
+                  <div className="record-card-top">
+                    <span className="record-year">{document.year}</span>
+                    <span className="status-badge status-leido">
+                      {document.mentionCount} {copy.connected.mentionsSuffix}
+                    </span>
                   </div>
-                  <p>{context.snippet}</p>
+                  <h3>{document.shortTitle}</h3>
+                  <p className="record-type">
+                    {document.recordType} · {document.place}
+                  </p>
+                  <div className="chip-row">
+                    {document.termLabels.slice(0, 5).map((label) => (
+                      <span key={label} className="chip">
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="document-links">
+                    {buildDocumentLinks(document, activeLocale).map((link) => (
+                      <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
                 </article>
               ))}
             </div>
-          </div>
-        </aside>
-      </section>
+          </section>
 
-      <section className="workspace-grid">
-        <div className="workspace-card">
-          <div className="section-heading">
-            <div>
-              <p className="section-label">{copy.lexicon.sectionLabel}</p>
-              <h2>{copy.lexicon.title}</h2>
+          <section className="documents-section">
+            <div className="section-heading">
+              <div>
+                <p className="section-label">{copy.prospecting.sectionLabel}</p>
+                <h2>{copy.prospecting.title}</h2>
+              </div>
+              <p className="section-copy">{copy.prospecting.text}</p>
             </div>
-            <p className="section-copy">{copy.lexicon.text}</p>
-          </div>
 
-          <div className="term-grid">
-            {terms.map((term) => (
-              <article key={term.id} className="term-card">
-                <div className="term-card-head">
-                  <div>
-                    <p className="term-category">{term.category}</p>
-                    <h3>{term.canonical}</h3>
+            <div className="document-grid">
+              {discoveredDocuments.map((document) => (
+                <article key={document.id} className="document-card">
+                  <div className="record-card-top">
+                    <span className="record-year">{document.year}</span>
+                    <span className="status-badge status-pendiente">{document.recordType}</span>
                   </div>
-                  <button
-                    type="button"
-                    className="secondary-button"
-                    onClick={() => {
-                      setTermMode('edit')
-                      setTermDraft({
-                        id: term.id,
-                        canonical: term.canonical,
-                        variants: term.variants.join(', '),
-                        category: term.category,
-                        notes: term.notes ?? '',
-                      })
-                    }}
-                  >
-                    {copy.lexicon.editButton}
-                  </button>
-                </div>
-                <p>{term.notes || copy.lexicon.noMethodNote}</p>
-                <div className="chip-row">
-                  {term.variants.map((variant) => (
-                    <span key={variant} className="chip">
-                      {variant}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <form className="workspace-form" onSubmit={handleTermSubmit}>
-            <div className="form-head">
-              <h3>{termMode === 'edit' ? copy.lexicon.editTitle : copy.lexicon.newTitle}</h3>
-              {termMode === 'edit' ? (
-                <button
-                  type="button"
-                  className="ghost-button"
-                  onClick={() => {
-                    setTermDraft(emptyTermDraft)
-                    setTermMode('new')
-                  }}
-                >
-                  {copy.lexicon.cancelEdit}
-                </button>
-              ) : null}
+                  <h3>{document.shortTitle}</h3>
+                  <p className="record-type">
+                    {document.creator} · {document.sourceHost}
+                  </p>
+                  <p>{document.focus}</p>
+                  <div className="document-links">
+                    <a href={document.url} target="_blank" rel="noreferrer">
+                      {copy.prospecting.source}
+                    </a>
+                    <a href={document.ocrUrl} target="_blank" rel="noreferrer">
+                      {copy.prospecting.remoteOcr}
+                    </a>
+                  </div>
+                </article>
+              ))}
             </div>
+          </section>
+        </>
+      ) : null}
 
-            <div className="form-grid">
-              <label>
-                <span className="field-label">{copy.lexicon.canonical}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={termDraft.canonical}
-                  onChange={(event) =>
-                    setTermDraft((current) => ({
-                      ...current,
-                      canonical: event.target.value,
-                    }))
-                  }
-                  placeholder="scirrhus of the breast"
-                />
-              </label>
-
-              <label>
-                <span className="field-label">{copy.lexicon.category}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={termDraft.category}
-                  onChange={(event) =>
-                    setTermDraft((current) => ({
-                      ...current,
-                      category: event.target.value,
-                    }))
-                  }
-                  placeholder="nomenclatura historica"
-                />
-              </label>
+      {activeSection === 'about' ? (
+        <section className="study-grid study-grid-single">
+          <article className="study-card">
+            <p className="section-label">{copy.studySectionLabel}</p>
+            <h2>{copy.evaName}</h2>
+            <p className="field-label">{copy.evaBioLabel}</p>
+            <p>{copy.evaBio}</p>
+            <div className="study-callout">
+              <p>{copy.uploadCallout}</p>
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={() => handleSectionChange('workspace', 'upload-workspace')}
+              >
+                {copy.jumpToUpload}
+              </button>
             </div>
-
-            <label>
-              <span className="field-label">{copy.lexicon.variants}</span>
-              <textarea
-                rows="4"
-                value={termDraft.variants}
-                onChange={(event) =>
-                  setTermDraft((current) => ({
-                    ...current,
-                    variants: event.target.value,
-                  }))
-                }
-                placeholder={copy.lexicon.variantsPlaceholder}
-              />
-            </label>
-
-            <label>
-              <span className="field-label">{copy.lexicon.notes}</span>
-              <textarea
-                rows="3"
-                value={termDraft.notes}
-                onChange={(event) =>
-                  setTermDraft((current) => ({
-                    ...current,
-                    notes: event.target.value,
-                  }))
-                }
-                placeholder={copy.lexicon.notesPlaceholder}
-              />
-            </label>
-
-            <button type="submit" className="primary-button" disabled={termSaving}>
-              {termSaving
-                ? copy.lexicon.saving
-                : termMode === 'edit'
-                  ? copy.lexicon.saveEdit
-                  : copy.lexicon.saveNew}
-            </button>
-          </form>
-        </div>
-
-        <div className="workspace-card" id="upload-workspace">
-          <div className="section-heading">
-            <div>
-              <p className="section-label">{copy.upload.sectionLabel}</p>
-              <h2>{copy.upload.title}</h2>
-            </div>
-            <p className="section-copy">{copy.upload.text}</p>
-          </div>
-
-          <form className="workspace-form" onSubmit={handleUploadSubmit}>
-            <div className="form-grid form-grid-wide">
-              <label>
-                <span className="field-label">{copy.upload.fieldTitle}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={uploadDraft.title}
-                  onChange={(event) =>
-                    setUploadDraft((current) => ({
-                      ...current,
-                      title: event.target.value,
-                    }))
-                  }
-                />
-              </label>
-
-              <label>
-                <span className="field-label">{copy.upload.shortTitle}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={uploadDraft.shortTitle}
-                  onChange={(event) =>
-                    setUploadDraft((current) => ({
-                      ...current,
-                      shortTitle: event.target.value,
-                    }))
-                  }
-                />
-              </label>
-
-              <label>
-                <span className="field-label">{copy.upload.year}</span>
-                <input
-                  className="search-input"
-                  type="number"
-                  value={uploadDraft.year}
-                  onChange={(event) =>
-                    setUploadDraft((current) => ({
-                      ...current,
-                      year: event.target.value,
-                    }))
-                  }
-                />
-              </label>
-
-              <label>
-                <span className="field-label">{copy.upload.place}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={uploadDraft.place}
-                  onChange={(event) =>
-                    setUploadDraft((current) => ({
-                      ...current,
-                      place: event.target.value,
-                    }))
-                  }
-                />
-              </label>
-
-              <label>
-                <span className="field-label">{copy.upload.language}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={uploadDraft.language}
-                  onChange={(event) =>
-                    setUploadDraft((current) => ({
-                      ...current,
-                      language: event.target.value,
-                    }))
-                  }
-                />
-              </label>
-
-              <label>
-                <span className="field-label">{copy.upload.recordType}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={uploadDraft.recordType}
-                  onChange={(event) =>
-                    setUploadDraft((current) => ({
-                      ...current,
-                      recordType: event.target.value,
-                    }))
-                  }
-                  placeholder={copy.upload.recordTypePlaceholder}
-                />
-              </label>
-
-              <label>
-                <span className="field-label">{copy.upload.sourceHost}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={uploadDraft.sourceHost}
-                  onChange={(event) =>
-                    setUploadDraft((current) => ({
-                      ...current,
-                      sourceHost: event.target.value,
-                    }))
-                  }
-                />
-              </label>
-
-              <label>
-                <span className="field-label">{copy.upload.contributorName}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={uploadDraft.contributorName}
-                  onChange={(event) =>
-                    setUploadDraft((current) => ({
-                      ...current,
-                      contributorName: event.target.value,
-                    }))
-                  }
-                />
-              </label>
-
-              <label>
-                <span className="field-label">{copy.upload.contributorRole}</span>
-                <input
-                  className="search-input"
-                  type="text"
-                  value={uploadDraft.contributorRole}
-                  onChange={(event) =>
-                    setUploadDraft((current) => ({
-                      ...current,
-                      contributorRole: event.target.value,
-                    }))
-                  }
-                  placeholder={copy.upload.contributorRolePlaceholder}
-                />
-              </label>
-
-              <label className="file-field">
-                <span className="field-label">{copy.upload.file}</span>
-                <input
-                  type="file"
-                  onChange={(event) => setUploadFile(event.target.files?.[0] ?? null)}
-                />
-              </label>
-            </div>
-
-            <label>
-              <span className="field-label">{copy.upload.summary}</span>
-              <textarea
-                rows="3"
-                value={uploadDraft.summary}
-                onChange={(event) =>
-                  setUploadDraft((current) => ({
-                    ...current,
-                    summary: event.target.value,
-                  }))
-                }
-                placeholder={copy.upload.summaryPlaceholder}
-              />
-            </label>
-
-            <label>
-              <span className="field-label">{copy.upload.notes}</span>
-              <textarea
-                rows="3"
-                value={uploadDraft.notes}
-                onChange={(event) =>
-                  setUploadDraft((current) => ({
-                    ...current,
-                    notes: event.target.value,
-                  }))
-                }
-                placeholder={copy.upload.notesPlaceholder}
-              />
-            </label>
-
-            <label>
-              <span className="field-label">{copy.upload.ocrText}</span>
-              <textarea
-                rows="7"
-                value={uploadDraft.ocrText}
-                onChange={(event) =>
-                  setUploadDraft((current) => ({
-                    ...current,
-                    ocrText: event.target.value,
-                  }))
-                }
-                placeholder={copy.upload.ocrPlaceholder}
-              />
-            </label>
-
-            <button type="submit" className="primary-button" disabled={uploading}>
-              {uploading ? copy.upload.submitting : copy.upload.submit}
-            </button>
-          </form>
-        </div>
-      </section>
-
-      <section className="documents-section">
-        <div className="section-heading">
-          <div>
-            <p className="section-label">{copy.connected.sectionLabel}</p>
-            <h2>{copy.connected.title}</h2>
-          </div>
-          <p className="section-copy">{copy.connected.text}</p>
-        </div>
-
-        <div className="document-grid">
-          {filteredDocuments.slice(0, 12).map((document) => (
-            <article key={document.id} className="document-card">
-              <div className="record-card-top">
-                <span className="record-year">{document.year}</span>
-                <span className="status-badge status-leido">
-                  {document.mentionCount} {copy.connected.mentionsSuffix}
-                </span>
-              </div>
-              <h3>{document.shortTitle}</h3>
-              <p className="record-type">
-                {document.recordType} · {document.place}
-              </p>
-              <div className="chip-row">
-                {document.termLabels.slice(0, 5).map((label) => (
-                  <span key={label} className="chip">
-                    {label}
-                  </span>
-                ))}
-              </div>
-              <div className="document-links">
-                {buildDocumentLinks(document, activeLocale).map((link) => (
-                  <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="documents-section">
-        <div className="section-heading">
-          <div>
-            <p className="section-label">{copy.prospecting.sectionLabel}</p>
-            <h2>{copy.prospecting.title}</h2>
-          </div>
-          <p className="section-copy">{copy.prospecting.text}</p>
-        </div>
-
-        <div className="document-grid">
-          {discoveredDocuments.map((document) => (
-            <article key={document.id} className="document-card">
-              <div className="record-card-top">
-                <span className="record-year">{document.year}</span>
-                <span className="status-badge status-pendiente">{document.recordType}</span>
-              </div>
-              <h3>{document.shortTitle}</h3>
-              <p className="record-type">
-                {document.creator} · {document.sourceHost}
-              </p>
-              <p>{document.focus}</p>
-              <div className="document-links">
-                <a href={document.url} target="_blank" rel="noreferrer">
-                  {copy.prospecting.source}
-                </a>
-                <a href={document.ocrUrl} target="_blank" rel="noreferrer">
-                  {copy.prospecting.remoteOcr}
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+          </article>
+        </section>
+      ) : null}
     </main>
   )
 }

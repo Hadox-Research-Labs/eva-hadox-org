@@ -6,10 +6,10 @@ function TimelineChart({
   data,
   title,
   subtitle,
-  sectionLabel = 'Visualizacion clasica',
+  sectionLabel = 'Visualización clásica',
   totalLabel = 'corpus total',
   matchedLabel = 'documentos con menciones',
-  hint = 'Desplaza horizontalmente si la grafica se abre en movil.',
+  hint = 'Desplaza horizontalmente si la gráfica se abre en móvil.',
 }) {
   const [containerRef, { width: containerWidth }] = useContainerSize(760, 260)
   const scrollRef = useDragScroll()

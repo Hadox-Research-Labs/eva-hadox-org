@@ -9,7 +9,7 @@ function SearchResultsChart({
   sectionLabel = 'Lectura cuantitativa',
   items,
   formatValue = defaultFormatValue,
-  hint = 'La etiqueta se compacta en movil y la grafica puede desplazarse.',
+  hint = 'La etiqueta se compacta en móvil y la gráfica puede desplazarse.',
 }) {
   const [containerRef, { width: containerWidth }] = useContainerSize(760, 320)
   const scrollRef = useDragScroll()

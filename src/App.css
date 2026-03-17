@@ -5,6 +5,8 @@
 }
 
 .hero-panel,
+.section-nav-panel,
+.status-strip,
 .band,
 .algorithm-section,
 .controls-panel,
@@ -27,6 +29,8 @@
 }
 
 .hero-panel,
+.section-nav-panel,
+.status-strip,
 .band,
 .algorithm-section,
 .controls-panel,
@@ -47,6 +51,62 @@
   padding: 34px;
   position: relative;
   overflow: hidden;
+}
+
+.section-nav-panel,
+.status-strip {
+  margin-top: 22px;
+  padding: 22px 24px;
+}
+
+.section-nav-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.section-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.section-nav-button {
+  border-radius: 22px;
+  border: 1px solid rgba(93, 38, 32, 0.14);
+  background: rgba(255, 252, 247, 0.88);
+  padding: 15px 16px;
+  display: grid;
+  gap: 6px;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.section-nav-button:hover,
+.section-nav-button:focus-visible,
+.section-nav-button.is-active {
+  transform: translateY(-2px);
+  border-color: rgba(167, 49, 33, 0.34);
+  box-shadow: 0 14px 28px rgba(57, 20, 15, 0.08);
+}
+
+.section-nav-button.is-active {
+  background: linear-gradient(180deg, rgba(255, 245, 236, 1), rgba(250, 236, 221, 0.92));
+}
+
+.nav-kicker {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+.status-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
 }
 
 .hero-panel::before,
@@ -197,6 +257,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
+}
+
+.study-grid-single {
+  grid-template-columns: 1fr;
 }
 
 .study-card {
@@ -817,6 +881,10 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .section-nav-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .detail-panel {
     position: static;
   }
@@ -833,6 +901,10 @@ textarea {
   .term-grid,
   .document-grid {
     grid-template-columns: 1fr;
+  }
+
+  .section-nav-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .band,
@@ -865,6 +937,8 @@ textarea {
   }
 
   .hero-panel,
+  .section-nav-panel,
+  .status-strip,
   .band,
   .algorithm-section,
   .controls-panel,
@@ -886,6 +960,10 @@ textarea {
   }
 
   .algorithm-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-nav-grid {
     grid-template-columns: 1fr;
   }
 
