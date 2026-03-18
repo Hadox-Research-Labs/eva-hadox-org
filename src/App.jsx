@@ -162,7 +162,6 @@ async function requestState() {
 
 function App() {
   const [activeLocale, setActiveLocale] = useState('es')
-  const [activeSection, setActiveSection] = useState('overview')
   const [state, setState] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -196,26 +195,6 @@ function App() {
   const localeOptions = ['es', 'en', 'fr', 'pt']
   const networkColumns = networkColumnLabels[activeLocale]
   const sectionCopy = sectionLabels[activeLocale]
-
-  function handleSectionChange(sectionId, anchorId = '') {
-    setActiveSection(sectionId)
-
-    if (typeof window === 'undefined') {
-      return
-    }
-
-    window.setTimeout(() => {
-      if (anchorId) {
-        document.getElementById(anchorId)?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        })
-        return
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }, 70)
-  }
 
   useEffect(() => {
     let ignore = false
@@ -270,71 +249,6 @@ function App() {
   const project = {
     title: copy.projectTitle,
     focus: copy.projectFocus,
-  }
-  const sections = [
-    {
-      id: 'overview',
-      label: sectionCopy.overview.label,
-      blurb: sectionCopy.overview.blurb,
-      metric: `${analysis.summary.documentsTotal} ${copy.stats.documentsTotal}`,
-    },
-    {
-      id: 'analysis',
-      label: sectionCopy.analysis.label,
-      blurb: sectionCopy.analysis.blurb,
-      metric: `${cooccurrenceLabel(analysis)} ${copy.controls.cooccurrencePairs}`,
-    },
-    {
-      id: 'mentions',
-      label: sectionCopy.mentions.label,
-      blurb: sectionCopy.mentions.blurb,
-      metric: `${analysis.summary.totalMentions} ${copy.stats.totalMentions}`,
-    },
-    {
-      id: 'workspace',
-      label: sectionCopy.workspace.label,
-      blurb: sectionCopy.workspace.blurb,
-      metric: `${analysis.summary.configuredTerms} ${copy.stats.configuredTerms}`,
-    },
-    {
-      id: 'sources',
-      label: sectionCopy.sources.label,
-      blurb: sectionCopy.sources.blurb,
-      metric: `${discoveredDocuments.length} ${copy.stats.prospectedSources}`,
-    },
-    {
-      id: 'about',
-      label: sectionCopy.about.label,
-      blurb: sectionCopy.about.blurb,
-      metric: copy.evaName,
-    },
-  ]
-  const activeSectionMeta =
-    sections.find((section) => section.id === activeSection) ?? sections[0]
-
-  function handleSectionKeyDown(event, sectionId) {
-    const currentIndex = sections.findIndex((section) => section.id === sectionId)
-    if (currentIndex === -1) {
-      return
-    }
-
-    let nextIndex = currentIndex
-
-    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-      nextIndex = (currentIndex + 1) % sections.length
-    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-      nextIndex = (currentIndex - 1 + sections.length) % sections.length
-    } else if (event.key === 'Home') {
-      nextIndex = 0
-    } else if (event.key === 'End') {
-      nextIndex = sections.length - 1
-    } else {
-      return
-    }
-
-    event.preventDefault()
-    const nextSection = sections[nextIndex]
-    handleSectionChange(nextSection.id)
   }
 
   const termLookup = new Map(terms.map((term) => [term.id, term]))
@@ -443,6 +357,44 @@ function App() {
   const cooccurrenceItems = buildCooccurrenceItems(filteredMentions, termLookup)
   const networkData = buildNetworkData(topTermItems, cooccurrenceItems, filteredDocuments)
   const activeMention = filteredMentions.find((mention) => mention.id === selectedMentionId) ?? null
+  const sections = [
+    {
+      id: 'overview',
+      label: sectionCopy.overview.label,
+      blurb: sectionCopy.overview.blurb,
+      metric: `${analysis.summary.documentsTotal} ${copy.stats.documentsTotal}`,
+    },
+    {
+      id: 'analysis',
+      label: sectionCopy.analysis.label,
+      blurb: sectionCopy.analysis.blurb,
+      metric: `${cooccurrenceItems.length} ${copy.controls.cooccurrencePairs}`,
+    },
+    {
+      id: 'mentions',
+      label: sectionCopy.mentions.label,
+      blurb: sectionCopy.mentions.blurb,
+      metric: `${filteredMentions.length} ${copy.controls.visibleMentions}`,
+    },
+    {
+      id: 'workspace',
+      label: sectionCopy.workspace.label,
+      blurb: sectionCopy.workspace.blurb,
+      metric: `${analysis.summary.configuredTerms} ${copy.stats.configuredTerms}`,
+    },
+    {
+      id: 'sources',
+      label: sectionCopy.sources.label,
+      blurb: sectionCopy.sources.blurb,
+      metric: `${filteredDocuments.length} ${copy.controls.connectedDocuments}`,
+    },
+    {
+      id: 'about',
+      label: sectionCopy.about.label,
+      blurb: sectionCopy.about.blurb,
+      metric: copy.studySectionLabel,
+    },
+  ]
 
   useEffect(() => {
     if (!filteredMentions.length) {
@@ -703,27 +655,18 @@ function App() {
         <div className="section-nav-head">
           <div>
             <p className="section-label">{sectionCopy.nav}</p>
-            <h2 className="section-nav-title">{activeSectionMeta.label}</h2>
+            <h2 className="section-nav-title">{project.title}</h2>
           </div>
-          <p className="section-nav-summary">{activeSectionMeta.blurb}</p>
+          <p className="section-nav-summary">{project.focus}</p>
         </div>
 
         <div className="section-nav-shell">
-          <ol className="section-nav-list" role="tablist" aria-label={sectionCopy.nav}>
+          <ol className="section-nav-list" aria-label={sectionCopy.nav}>
             {sections.map((section, index) => (
               <li key={section.id} className="section-nav-item">
-                <button
-                  id={`section-tab-${section.id}`}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeSection === section.id}
-                  aria-controls={`section-panel-${section.id}`}
-                  tabIndex={activeSection === section.id ? 0 : -1}
-                  className={`section-nav-button ${
-                    activeSection === section.id ? 'is-active' : ''
-                  }`}
-                  onClick={() => handleSectionChange(section.id)}
-                  onKeyDown={(event) => handleSectionKeyDown(event, section.id)}
+                <a
+                  className="section-nav-button section-nav-anchor"
+                  href={`#section-${section.id}`}
                 >
                   <span className="nav-kicker">{String(index + 1).padStart(2, '0')}</span>
                   <span className="section-nav-copy">
@@ -731,17 +674,10 @@ function App() {
                     <small>{section.blurb}</small>
                   </span>
                   <span className="section-nav-metric">{section.metric}</span>
-                </button>
+                </a>
               </li>
             ))}
           </ol>
-
-          <aside className="section-nav-current" aria-live="polite">
-            <span className="section-nav-marker">{sectionCopy.currentLabel}</span>
-            <h3>{activeSectionMeta.label}</h3>
-            <p>{activeSectionMeta.blurb}</p>
-            <div className="section-nav-current-metric">{activeSectionMeta.metric}</div>
-          </aside>
         </div>
       </nav>
 
@@ -753,13 +689,7 @@ function App() {
         {error ? <p className="error-copy">{error}</p> : null}
       </section>
 
-      {activeSection === 'overview' ? (
-        <div
-          className="section-stage"
-          role="tabpanel"
-          id="section-panel-overview"
-          aria-labelledby="section-tab-overview"
-        >
+      <div className="section-stage" id="section-overview">
           <section className="study-grid study-grid-single">
             <article className="study-card">
               <p className="section-label">{copy.purposeLabel}</p>
@@ -767,13 +697,9 @@ function App() {
               <p>{copy.purpose}</p>
               <div className="study-callout">
                 <p>{copy.uploadCallout}</p>
-                <button
-                  type="button"
-                  className="secondary-button"
-                  onClick={() => handleSectionChange('workspace', 'upload-workspace')}
-                >
+                <a href="#upload-workspace" className="secondary-button">
                   {copy.jumpToUpload}
-                </button>
+                </a>
               </div>
             </article>
           </section>
@@ -805,16 +731,9 @@ function App() {
               ))}
             </div>
           </section>
-        </div>
-      ) : null}
+      </div>
 
-      {activeSection === 'analysis' ? (
-        <div
-          className="section-stage"
-          role="tabpanel"
-          id="section-panel-analysis"
-          aria-labelledby="section-tab-analysis"
-        >
+      <div className="section-stage" id="section-analysis">
           <section className="controls-panel">
             <div className="section-heading">
               <div>
@@ -982,16 +901,9 @@ function App() {
               recordColumnLabel={networkColumns.works}
             />
           </div>
-        </div>
-      ) : null}
+      </div>
 
-      {activeSection === 'mentions' ? (
-        <section
-          className="archive-layout section-stage"
-          role="tabpanel"
-          id="section-panel-mentions"
-          aria-labelledby="section-tab-mentions"
-        >
+      <section className="archive-layout section-stage" id="section-mentions">
           <div className="list-panel">
             <div className="list-heading">
               <div>
@@ -1110,16 +1022,9 @@ function App() {
               </div>
             </div>
           </aside>
-        </section>
-      ) : null}
+      </section>
 
-      {activeSection === 'workspace' ? (
-        <section
-          className="workspace-grid section-stage"
-          role="tabpanel"
-          id="section-panel-workspace"
-          aria-labelledby="section-tab-workspace"
-        >
+      <section className="workspace-grid section-stage" id="section-workspace">
           <div className="workspace-card">
             <div className="section-heading">
               <div>
@@ -1464,16 +1369,9 @@ function App() {
               </button>
             </form>
           </div>
-        </section>
-      ) : null}
+      </section>
 
-      {activeSection === 'sources' ? (
-        <div
-          className="section-stage"
-          role="tabpanel"
-          id="section-panel-sources"
-          aria-labelledby="section-tab-sources"
-        >
+      <div className="section-stage" id="section-sources">
           <section className="documents-section">
             <div className="section-heading">
               <div>
@@ -1548,16 +1446,9 @@ function App() {
               ))}
             </div>
           </section>
-        </div>
-      ) : null}
+      </div>
 
-      {activeSection === 'about' ? (
-        <section
-          className="study-grid study-grid-single section-stage"
-          role="tabpanel"
-          id="section-panel-about"
-          aria-labelledby="section-tab-about"
-        >
+      <section className="study-grid study-grid-single section-stage" id="section-about">
           <article className="study-card">
             <p className="section-label">{copy.studySectionLabel}</p>
             <h2>{copy.evaName}</h2>
@@ -1565,17 +1456,12 @@ function App() {
             <p>{copy.evaBio}</p>
             <div className="study-callout">
               <p>{copy.uploadCallout}</p>
-              <button
-                type="button"
-                className="secondary-button"
-                onClick={() => handleSectionChange('workspace', 'upload-workspace')}
-              >
+              <a href="#upload-workspace" className="secondary-button">
                 {copy.jumpToUpload}
-              </button>
+              </a>
             </div>
           </article>
-        </section>
-      ) : null}
+      </section>
     </main>
   )
 }
@@ -1605,10 +1491,6 @@ function parseVariants(value) {
     .split(/[\n,]/)
     .map((entry) => entry.trim())
     .filter(Boolean)
-}
-
-function cooccurrenceLabel(analysis) {
-  return analysis?.cooccurrences?.length ?? 0
 }
 
 function buildTimeline(documents, mentionSummaryByDocument) {

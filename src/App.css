@@ -112,16 +112,13 @@
 .section-nav-shell {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
-  gap: 18px;
-  align-items: stretch;
+  display: block;
 }
 
 .section-nav-list {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   margin: 0;
   padding: 0;
@@ -153,6 +150,10 @@
     background 180ms ease, opacity 180ms ease;
 }
 
+.section-nav-anchor {
+  text-decoration: none;
+}
+
 .section-nav-button::before {
   content: '';
   position: absolute;
@@ -170,17 +171,6 @@
   transform: translateY(-2px);
   border-color: rgba(167, 49, 33, 0.34);
   box-shadow: 0 14px 28px rgba(57, 20, 15, 0.08);
-}
-
-.section-nav-button.is-active {
-  background:
-    linear-gradient(135deg, rgba(255, 246, 238, 1), rgba(248, 232, 213, 0.98)),
-    rgba(255, 245, 236, 1);
-  border-color: rgba(167, 49, 33, 0.38);
-}
-
-.section-nav-button[aria-selected='false'] {
-  opacity: 0.96;
 }
 
 .nav-kicker {
@@ -220,45 +210,6 @@
   color: var(--accent-dark);
   font-size: 0.8rem;
   font-weight: 700;
-}
-
-.section-nav-current {
-  border-radius: 28px;
-  padding: 22px 22px 20px;
-  background:
-    linear-gradient(180deg, rgba(255, 251, 246, 0.96), rgba(247, 239, 228, 0.92)),
-    rgba(255, 252, 247, 0.88);
-  border: 1px solid rgba(93, 38, 32, 0.12);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
-  display: grid;
-  align-content: start;
-  gap: 10px;
-}
-
-.section-nav-marker {
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.section-nav-current h3 {
-  margin: 0;
-  font-size: 1.55rem;
-}
-
-.section-nav-current p {
-  color: var(--muted);
-}
-
-.section-nav-current-metric {
-  margin-top: 8px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(93, 38, 32, 0.1);
-  font-family: var(--mono);
-  font-size: 0.86rem;
-  color: var(--accent-dark);
 }
 
 .status-strip {
@@ -1032,7 +983,8 @@ textarea {
 }
 
 .section-stage {
-  margin-top: 0;
+  margin-top: 22px;
+  scroll-margin-top: 24px;
 }
 
 @media (max-width: 1220px) {
@@ -1044,13 +996,13 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .section-nav-head,
-  .section-nav-shell {
+  .section-nav-head {
     grid-template-columns: 1fr;
   }
 
   .section-nav-summary {
     justify-self: start;
+    max-width: none;
   }
 
   .detail-panel {
