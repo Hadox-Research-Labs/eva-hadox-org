@@ -9,6 +9,8 @@ This document defines the expected contribution workflow for maintainers and ext
 
 For repository authority and release ownership, see [docs/governance.md](docs/governance.md) and [docs/release-strategy.md](docs/release-strategy.md).
 
+For the project growth path from contributor to reviewer and maintainer, see [ROADMAP.md](ROADMAP.md).
+
 ## Principles
 
 - Keep the repository runnable from local source with minimal prerequisites.
