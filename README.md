@@ -107,6 +107,7 @@ See [docs/research-methodology.md](docs/research-methodology.md) for the full me
 - [docs/api.md](docs/api.md): HTTP API, payloads, validation rules, and examples.
 - [docs/data-model.md](docs/data-model.md): repository datasets and runtime persistence model.
 - [docs/operations.md](docs/operations.md): local development, Docker, backup, restore, and deployment runbook.
+- [docs/maintainer-admin.md](docs/maintainer-admin.md): GitHub/Gitea administration, branch protection, and promotion steps.
 - [docs/release-strategy.md](docs/release-strategy.md): branch model, promotion flow, and release/tag policy.
 - [docs/research-methodology.md](docs/research-methodology.md): scientific framing, research questions, and interdisciplinary method.
 - [docs/open-source-release.md](docs/open-source-release.md): Gitea and GitHub publishing orientation and release checklist.
@@ -116,6 +117,7 @@ See [docs/research-methodology.md](docs/research-methodology.md) for the full me
 - [SECURITY.md](SECURITY.md): vulnerability reporting and security boundaries.
 - [SECURITY_CONTACT.md](SECURITY_CONTACT.md): private reporting paths and maintainer security contacts.
 - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): collaboration standards.
+- [CHANGELOG.md](CHANGELOG.md): release history and notable project changes.
 
 ## License
 
