@@ -27,6 +27,7 @@ Initial public open-source research baseline.
 ### Security
 
 - GitHub repository hardened with branch protection, vulnerability alerts, and automated security fixes.
+- Gitea `main` and `deploy/eva-hadox-org` now protected with maintainer allowlists and force-push restrictions.
 
 ## Release Workflow
 

@@ -37,6 +37,7 @@ Maintainers are expected to:
 - review technical and documentation changes;
 - keep public and canonical mirrors aligned;
 - protect secrets and deployment paths;
+- keep branch-protection and release controls aligned with the actual maintainer count;
 - communicate clearly when policies or contribution paths change.
 
 ## Contribution Intake
@@ -91,3 +92,9 @@ As the project grows, maintainers should consider adding:
 3. release cadence expectations;
 4. archival and data-rights governance policy;
 5. public roadmap and milestone ownership.
+
+## Review Policy Maturity
+
+The current repository protections are intentionally sized for a one-maintainer phase.
+
+Later, when the project has at least one additional active maintainer, GitHub `main` should be tightened to require pull requests with approval before merge. That is the more professional steady state for a mature open research project, but applying it too early would create an artificial maintenance bottleneck.

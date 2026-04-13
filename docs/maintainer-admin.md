@@ -46,9 +46,26 @@ Drone now deploys from:
 
 - `deploy/eva-hadox-org`
 
+## Current Enforced Gitea Branch Protection State
+
+The Gitea API now enforces protection rules for:
+
+- `main`
+- `deploy/eva-hadox-org`
+
+Current enforced behavior:
+
+- force pushes are disabled;
+- merge whitelist is enabled for `hadoxmin`;
+- push whitelist is enabled for `hadoxmin`;
+- status checks are not yet enforced at the branch-rule layer;
+- review-count requirements are not yet enforced at the branch-rule layer.
+
+This is an intentionally practical first phase. It protects the operational remote against destructive pushes while keeping single-maintainer operation workable.
+
 ## Exact Gitea Branch Protection Settings To Click
 
-These are the recommended manual settings in the Gitea web UI for the repo at `git.hadox.org`.
+These are the matching manual settings in the Gitea web UI for the repo at `git.hadox.org`.
 
 ### Protect `deploy/eva-hadox-org`
 
@@ -70,14 +87,14 @@ Set:
 - whitelist pushers: only the maintainers who are allowed to promote production
 - whitelist merge approvals if available: maintainers only
 
-Recommended intent:
+Operational intent:
 
 - only trusted maintainers can move the live deployment branch;
 - production promotion remains explicit and auditable.
 
 ### Protect `main` In Gitea
 
-Also recommended:
+Also enforced and recommended:
 
 1. repository
 2. `Settings`
@@ -165,15 +182,22 @@ Recommended future settings:
 
 This is the right time to strengthen review rules because there will be enough maintainers to avoid deadlocking the repository.
 
+Suggested trigger for that change:
+
+- at least two active maintainers with merge rights;
+- at least one reviewer who is not the author of most routine changes;
+- enough continuity that vacations or travel will not freeze urgent fixes.
+
 ## Suggested Release And Notes Workflow
 
 Recommended pattern:
 
 1. merge reviewed work into `main`
 2. update [CHANGELOG.md](../CHANGELOG.md)
-3. tag the release on a reviewed `main` commit
-4. promote the same or a known-good release commit to `deploy/eva-hadox-org`
-5. publish release notes in GitHub and, if desired, mirror them in Gitea
+3. draft release notes from [docs/release-notes-template.md](release-notes-template.md)
+4. tag the release on a reviewed `main` commit
+5. promote the same or a known-good release commit to `deploy/eva-hadox-org`
+6. publish release notes in GitHub and, if desired, mirror them in Gitea
 
 ## What Should Stay Out Of The Repository
 
@@ -193,3 +217,5 @@ If you want me to automate Gitea branch protection, repo settings, or release ma
 - a documented local token path you explicitly authorize me to use
 
 Until then, GitHub admin actions can be automated here more easily than Gitea admin actions.
+
+That prerequisite has now been satisfied in this environment through the documented local token path, so Gitea branch protection has been applied directly for this repository.

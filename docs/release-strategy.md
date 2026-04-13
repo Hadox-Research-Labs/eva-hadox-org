@@ -17,6 +17,7 @@ Purpose:
 Remote expectations:
 
 - protected in GitHub;
+- currently practical protection only in GitHub because the project is still in a one-maintainer phase;
 - may also exist in Gitea as the mirrored integration branch.
 
 ### `deploy/eva-hadox-org`
@@ -30,7 +31,7 @@ Purpose:
 Remote expectations:
 
 - must exist in Gitea;
-- should be protected in Gitea;
+- is protected in Gitea;
 - should only move through maintainer-controlled promotion.
 
 ## Promotion Flow
@@ -70,18 +71,31 @@ Tags should point to commits already validated in `main`.
 
 ### GitHub `main`
 
-- require pull requests before merge;
-- require at least one review;
-- require conversation resolution;
-- disallow force pushes;
-- disallow branch deletion.
+- currently enforced:
+  - disallow force pushes;
+  - disallow deletion;
+  - enable vulnerability alerts and automated fixes.
+- later, when a second active maintainer exists:
+  - require pull requests before merge;
+  - require at least one review;
+  - require conversation resolution;
+  - consider enforcing rules for admins.
+- keep force pushes disabled;
+- keep branch deletion disabled.
+
+### Gitea `main`
+
+- push whitelist enforced for `hadoxmin`;
+- merge whitelist enforced for `hadoxmin`;
+- force pushes disabled.
 
 ### Gitea `deploy/eva-hadox-org`
 
-- restrict direct pushes to maintainers;
+- push whitelist enforced for `hadoxmin`;
+- merge whitelist enforced for `hadoxmin`;
 - disallow force pushes;
-- disallow deletion;
-- require promotion to be explicit and auditable.
+- branch deletion blocked through protection;
+- production promotion remains explicit and auditable.
 
 ## Manual Promotion Example
 
@@ -103,3 +117,13 @@ If a deployment must be rolled back:
 ## First Public Release
 
 The current open-source baseline is suitable to mark as `v0.1.0`.
+
+## Release Notes Workflow
+
+For each tagged release:
+
+1. update [CHANGELOG.md](../CHANGELOG.md);
+2. copy [docs/release-notes-template.md](release-notes-template.md);
+3. fill in the release-specific research, operational, and verification notes;
+4. publish the notes with the tag in GitHub;
+5. if desired, mirror the same notes into Gitea.
