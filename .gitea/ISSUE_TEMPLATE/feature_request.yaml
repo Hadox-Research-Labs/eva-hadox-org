@@ -1,0 +1,35 @@
+name: Feature request
+description: Propose a new capability or improvement
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the requested capability.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What workflow problem or limitation does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: direction
+    attributes:
+      label: Proposed direction
+      description: Describe the preferred solution at a high level.
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact area
+      description: Frontend, API, analysis pipeline, ingestion, docs, or operations.
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Research needs, examples, or references.

@@ -1,121 +1,277 @@
-# Archivo historico de cancer de mama
+# EVA Breast Cancer Archive Platform
 
-Plataforma colaborativa para una investigacion cientifica sobre la historia del cancer de mama antes de 1900. El foco del proyecto es:
+EVA Breast Cancer Archive Platform is an interdisciplinary open research platform for studying how breast cancer was named, described, classified, and treated before 1900.
 
-- localizar todos los archivos del corpus donde aparezcan menciones relevantes;
-- comparar coincidencias entre terminos, variantes, documentos, decadas y contextos;
-- permitir que Eva y la comunidad agreguen nuevos terminos y nuevos documentos;
-- vectorizar el corpus para comparar fragmentos contextualmente similares.
+It brings together historical source curation, conceptual and lexical analysis, and computational corpus methods in a single environment intended for collaborative research.
 
-## Lo que ya hace
+The platform combines:
 
-- corpus semilla cargado desde `src/data/records.json`;
-- lexico configurable con terminos canonicos, variantes y notas metodologicas;
-- deteccion de menciones en todos los documentos disponibles;
-- coocurrencias por fragmento y cronologia por decada;
-- comparacion contextual por TF-IDF tanto desde una mencion detectada como desde un fragmento pegado manualmente;
-- formulario unico para cargar nuevas fuentes con metadatos, OCR y archivo adjunto;
-- capa de prospeccion con documentos ya localizados pero todavia no curados en el corpus principal;
-- visualizaciones D3 responsivas, movibles y con red draggable.
+- a curated seed corpus stored in the repository;
+- a local editable lexicon of historical terms and variants;
+- full-corpus mention detection across seed and uploaded documents;
+- contextual similarity based on TF-IDF chunk vectors;
+- a collaborative ingestion workflow for OCR, notes, and uploaded files;
+- a prospecting layer for documents identified but not yet curated into the main corpus.
 
-## Comandos
+This repository is the technical base intended to be maintained in Gitea at `git.hadox.org` and mirrored publicly to GitHub.
+
+## Public Summary
+
+This project sits at the intersection of:
+
+- history of medicine;
+- philosophy of language and classification;
+- digital humanities;
+- computer science applied to corpus exploration.
+
+The platform supports researchers who want to trace how historical disease categories were formed, stabilized, contested, and recorded across archival, medical, and public texts.
+
+## Status
+
+The codebase is functional and deployable, but still intentionally simple:
+
+- no authentication or authorization layer;
+- no relational database;
+- no background jobs;
+- no external search engine;
+- no automated test suite yet;
+- persistent state stored on disk in JSON files and uploaded assets.
+
+That simplicity makes the platform easy to run and hack on, but it also means operators should treat it as a research platform with explicit operational discipline.
+
+## What The Platform Does
+
+The current runtime supports:
+
+- corpus bootstrapping from `src/data/records.json`;
+- editable term management through the API and UI;
+- seeded and uploaded document analysis;
+- mention detection for canonical terms and variants;
+- co-occurrence analysis within document chunks;
+- timeline and term-frequency visualizations;
+- contextual comparison from a selected mention;
+- contextual comparison from manually pasted OCR text;
+- collaborative document upload with metadata, OCR text, and file attachment;
+- viewing uploaded OCR and original files through `/uploads/*`.
+
+## Research Orientation
+
+This project sits at the intersection of:
+
+- history of medicine;
+- philosophy of language and classification;
+- digital humanities;
+- computer science applied to corpus exploration.
+
+It is not only a software product. It is also a research instrument for studying how disease categories are historically named, stabilized, contested, and operationalized across medical, popular, and archival texts.
+
+See [docs/research-methodology.md](docs/research-methodology.md) for the full methodological framing.
+
+## Technology Stack
+
+- Frontend: React 19 + Vite
+- Backend: Express 5
+- Visualization: D3
+- File upload handling: Multer
+- Persistence: local JSON files + uploaded files on disk
+- Containerization: Docker / Docker Compose
+- CI/CD: Drone pipeline with remote deployment over SSH
+
+## Repository Layout
+
+```text
+.
+├── Dockerfile
+├── compose.yaml
+├── compose.hostinger.yaml
+├── server/
+│   ├── analysis.mjs
+│   ├── index.mjs
+│   └── store.mjs
+├── src/
+│   ├── App.jsx
+│   ├── components/
+│   └── data/
+├── public/
+│   └── raw/ocr/
+├── runtime-data/
+├── scripts/
+│   ├── download-sources.mjs
+│   └── drone_deploy.sh
+└── docs/
+```
+
+## Documentation Map
+
+- [docs/architecture.md](docs/architecture.md): system design, request flow, and deployment topology.
+- [docs/api.md](docs/api.md): HTTP API, payloads, validation rules, and examples.
+- [docs/data-model.md](docs/data-model.md): repository datasets and runtime persistence model.
+- [docs/operations.md](docs/operations.md): local development, Docker, backup, restore, and deployment runbook.
+- [docs/research-methodology.md](docs/research-methodology.md): scientific framing, research questions, and interdisciplinary method.
+- [docs/open-source-release.md](docs/open-source-release.md): Gitea and GitHub publishing orientation and release checklist.
+- [docs/governance.md](docs/governance.md): canonical remote policy, maintainer roles, and release authority.
+- [DATA_RIGHTS.md](DATA_RIGHTS.md): rights and redistribution policy for OCR, archival sources, and uploaded materials.
+- [CONTRIBUTING.md](CONTRIBUTING.md): contributor workflow and collaboration rules.
+- [SECURITY.md](SECURITY.md): vulnerability reporting and security boundaries.
+- [SECURITY_CONTACT.md](SECURITY_CONTACT.md): private reporting paths and maintainer security contacts.
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): collaboration standards.
+
+## License
+
+This codebase is licensed under the Apache License 2.0. See [LICENSE](LICENSE).
+
+The software license applies to the code in this repository. Historical source texts, OCR artifacts, linked archival materials, and uploaded research data may be subject to separate rights and must be reviewed independently before redistribution. See [DATA_RIGHTS.md](DATA_RIGHTS.md).
+
+## Prerequisites
+
+Use the same major runtime used in CI and Docker:
+
+- Node.js 24.x
+- npm 11.x or newer
+- Docker Engine with Docker Compose plugin for containerized runs
+
+The code may work on slightly older modern Node releases, but `24.x` is the supported baseline because CI and production containers both use it.
+
+## Quick Start
+
+Install dependencies:
 
 ```bash
-npm install
+npm ci
+```
+
+Download remote OCR files declared in the seed corpus:
+
+```bash
 npm run download:sources
+```
+
+Build the frontend bundle:
+
+```bash
 npm run build
+```
+
+Start the production-style application server:
+
+```bash
 npm run server
 ```
 
-Para desarrollo de frontend con proxy a la API:
+The application will be available at `http://localhost:8080` when started directly with Node.
+
+## Local Development
+
+The repository uses a split local development workflow:
+
+1. Start the backend server:
+
+```bash
+npm run server
+```
+
+2. In a second terminal, start the Vite development server:
 
 ```bash
 npm run dev
 ```
 
+The Vite server proxies `/api` and `/uploads` to `http://localhost:8080`. See `vite.config.js` for the proxy configuration.
+
+During frontend development the default Vite URL is typically `http://localhost:5173`.
+
 ## Docker
+
+For a local containerized run:
 
 ```bash
 docker compose up --build -d
 ```
 
-La plataforma queda disponible en `http://localhost:4173`.
+The local compose file:
 
-Los datos persistentes viven en `runtime-data/` y se montan como volumen dentro del contenedor.
+- builds the application image from `Dockerfile`;
+- binds host port `4173` to container port `8080`;
+- mounts `./runtime-data` into the container for persistence.
 
-## CI/CD con Gitea + Drone
+The application will be available at `http://localhost:4173`.
 
-El despliegue pensado para `eva.hadox.org` usa:
+## Persistence Model
 
-- Gitea como origen git;
-- Drone para validacion y despliegue;
-- `deploy@191.101.233.39` como destino;
-- `docker compose` en `/home/deploy/eva.hadox.org`.
+Application state is persisted in `runtime-data/`:
 
-Archivos relevantes:
+- `runtime-data/terms.json`
+- `runtime-data/documents.json`
+- `runtime-data/uploads/`
 
-- `.drone.yml`: pipeline de validacion y deploy;
-- `scripts/drone_deploy.sh`: despliegue remoto en `srv566867`.
+On first boot, the server seeds missing files from repository data:
 
-La pipeline hace esto:
+- seed corpus records are read from `src/data/records.json`;
+- default terms are created from `server/store.mjs`.
 
-1. `npm ci`
-2. `npm run lint`
-3. `npm run build`
-4. `rsync` del repo al VPS sin tocar `runtime-data/`
-5. `docker compose -f compose.hostinger.yaml build --pull archive`
-6. `docker compose -f compose.hostinger.yaml up -d --remove-orphans archive`
+If `runtime-data/` already exists, it is treated as the source of truth.
 
-### Secreto requerido en Drone
+## Environment Variables
 
-Crear un secreto de repositorio llamado `EVA_DEPLOY_SSH_KEY` con la llave privada que ya entra como `deploy` a `191.101.233.39`.
+The runtime is intentionally small. The important environment variables are:
 
-### Alta sugerida en Gitea
+- `PORT`: HTTP server port. Default `8080`.
+- `DATA_DIR`: absolute or relative path to the runtime data directory. Default `./runtime-data` relative to the repository root when running outside Docker.
+- `COMPOSE_PROJECT_NAME`: used by Docker Compose. Local `.env` currently sets `25-eva-hadox-dev`.
 
-Ejemplo de remoto SSH:
+## Quality Gates
+
+Validation currently consists of:
 
 ```bash
-git init -b main
-git remote add origin ssh://git@git.hadox.org:2222/hadoxmin/eva-hadox-org.git
-git add .
-git commit -m "Initial eva archive platform"
-git push -u origin main
+npm run lint
+npm run build
 ```
 
-### Alta sugerida en Drone
+That same validation is used by the Drone pipeline before deployment.
 
-1. Sincronizar repositorios en `https://drone.hadox.org`
-2. Activar el repo de `eva`
-3. Agregar el secreto `EVA_DEPLOY_SSH_KEY`
-4. Hacer push a `main`
+## Deployment Summary
 
-Si quieres automatizar tambien la creacion del repo en Gitea y el alta de secretos en Drone, ahi si necesito token API de Gitea y/o Drone.
+The current deployment model is SSH-based:
 
-## Estructura
+- Gitea hosts the primary Git repository.
+- Drone runs validation and deployment on pushes to `main`.
+- The deployment target is a VPS under `/home/deploy/eva.hadox.org`.
+- The production compose file is `compose.hostinger.yaml`.
+- The production container binds `127.0.0.1:4174:8080`, so an external reverse proxy is expected in front of it.
 
-- `server/index.mjs`: API Express y entrega del frontend compilado.
-- `server/analysis.mjs`: menciones, coocurrencias y comparacion vectorial.
-- `server/store.mjs`: persistencia local de terminos, documentos y uploads.
-- `src/App.jsx`: tablero principal de investigacion.
-- `src/data/discoveredDocuments.js`: fuentes nuevas rastreadas para prospeccion.
-- `src/components/`: visualizaciones D3.
-- `src/data/records.json`: corpus semilla.
-- `public/raw/ocr/`: OCR locales descargados.
-- `runtime-data/`: terminos editados, documentos cargados y archivos subidos.
+See [docs/operations.md](docs/operations.md) for the full runbook.
 
-## API principal
+## Open Source Orientation
 
-- `GET /api/state`: estado del corpus, terminos y analisis agregado.
-- `POST /api/terms`: agrega un termino nuevo.
-- `PUT /api/terms/:termId`: actualiza un termino existente.
-- `POST /api/documents`: agrega un documento al corpus.
-- `GET /api/similar-contexts/:mentionId`: vecinos contextuales desde una mencion.
-- `POST /api/context-query`: vecinos contextuales desde un fragmento pegado.
+This repository is being prepared to serve two roles:
 
-## Siguiente iteracion sugerida
+- private or internal system-of-record repository in Gitea at `git.hadox.org`;
+- public mirror on GitHub for open source collaboration and discoverability.
 
-1. embeddings multilingues reales para espanol, frances e ingles;
-2. entidades historicas: personas, hospitales, ciudades, oficios y tratamientos;
-3. importacion masiva CSV/JSON para lotes de documentos;
-4. revision editorial por estados y trazabilidad de cambios;
-5. exportacion de reportes curados por dossier o pregunta historiografica.
+The intended pattern is:
+
+- Gitea remains the canonical remote for operations and deployment;
+- GitHub mirrors the same codebase for public collaboration;
+- documentation in this repository must be sufficient for external contributors to understand architecture, data flow, and contribution expectations without private operator context.
+
+See [docs/open-source-release.md](docs/open-source-release.md) for the publishing model and release checklist.
+See [docs/governance.md](docs/governance.md) for the canonical-remote policy and maintainer authority model.
+
+## Known Limitations
+
+- No auth means anyone with network access to the running app can modify terms and upload documents.
+- Persistence is local-disk JSON, so concurrent multi-node writes are not supported.
+- Similarity is lexical TF-IDF, not embedding-based semantic search.
+- There are no delete endpoints for terms or documents.
+- Large-scale ingestion workflows, moderation, and editorial review states are still minimal.
+
+## Maintainer Recommendation
+
+Before broad public release, prioritize:
+
+1. adding authentication and role separation;
+2. hardening the upload and moderation governance path;
+3. adding automated tests for the API and analysis pipeline;
+4. documenting reverse proxy and TLS configuration;
+5. continuously maintaining explicit data-rights and archival-material redistribution policy.
