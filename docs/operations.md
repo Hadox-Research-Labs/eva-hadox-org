@@ -195,14 +195,20 @@ There is currently no automated test suite. Lint and build are the main safety c
 
 Drone pipeline behavior:
 
-1. clone the repository on `push` and `pull_request` for `main`;
+1. clone the repository on `push` and `pull_request` for `main` and `deploy/eva-hadox-org`;
 2. run:
    - `npm ci`
    - `npm run lint`
    - `npm run build`
-3. on push to `main`, deploy via SSH to the VPS;
+3. on push to `deploy/eva-hadox-org`, deploy via SSH to the VPS;
 4. sync repository contents with `rsync`, excluding runtime and local artifacts;
 5. execute `scripts/drone_deploy.sh` on the remote machine.
+
+Branch behavior:
+
+- `main` is the open collaboration branch;
+- `deploy/eva-hadox-org` is the production deployment branch;
+- deployment should happen only after a reviewed promotion from `main`.
 
 ### Required Drone Secret
 
@@ -219,7 +225,8 @@ The current intended production deployment uses:
 - target VPS at `191.101.233.39`;
 - deploy user home path `/home/deploy/eva.hadox.org`;
 - production compose file `compose.hostinger.yaml`;
-- internal bind `127.0.0.1:4174:8080`.
+- internal bind `127.0.0.1:4174:8080`;
+- deployment branch `deploy/eva-hadox-org`.
 
 Operational implication:
 

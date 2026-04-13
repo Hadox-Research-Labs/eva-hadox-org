@@ -48,7 +48,11 @@ Use one of these patterns explicitly and document it in both remotes:
 - release tags are always cut from the Gitea canonical branch;
 - GitHub is updated immediately after merges.
 
-For this project, Pattern A is operationally simpler because deployment already depends on Gitea and Drone.
+For this project, the most professional model is a hybrid:
+
+- GitHub `main` for public collaboration;
+- Gitea for operational deployment authority;
+- a dedicated deployment branch in Gitea so production promotion is separate from public collaboration traffic.
 
 ## Minimum Public Metadata To Add
 
@@ -82,6 +86,7 @@ Recommended baseline:
 
 - default branch: `main`
 - protected branch: `main`
+- deployment branch in Gitea: `deploy/eva-hadox-org`
 - short-lived feature branches
 - tags for releaseable states
 
@@ -135,12 +140,12 @@ Avoid framing it as:
 
 ## Suggested Immediate Open Source Roadmap
 
-1. add a license;
-2. add governance metadata and canonical-remote notice;
-3. add tests for API and analysis logic;
-4. add authentication before any wide public write-enabled deployment;
-5. add export/import and moderation tooling;
-6. define public issue labels and milestones.
+1. protect `main` in GitHub and the deployment branch in Gitea;
+2. add tests for API and analysis logic;
+3. add authentication before any wide public write-enabled deployment;
+4. add export/import and moderation tooling;
+5. define public issue labels and milestones;
+6. document and enforce the promotion flow to production.
 
 ## Mirror Synchronization Recommendation
 

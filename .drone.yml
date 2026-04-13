@@ -12,6 +12,7 @@ trigger:
     - pull_request
   branch:
     - main
+    - deploy/eva-hadox-org
 
 steps:
   - name: validate
@@ -54,4 +55,4 @@ steps:
       event:
         - push
       branch:
-        - main
+        - deploy/eva-hadox-org

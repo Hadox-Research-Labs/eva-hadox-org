@@ -107,6 +107,7 @@ See [docs/research-methodology.md](docs/research-methodology.md) for the full me
 - [docs/api.md](docs/api.md): HTTP API, payloads, validation rules, and examples.
 - [docs/data-model.md](docs/data-model.md): repository datasets and runtime persistence model.
 - [docs/operations.md](docs/operations.md): local development, Docker, backup, restore, and deployment runbook.
+- [docs/release-strategy.md](docs/release-strategy.md): branch model, promotion flow, and release/tag policy.
 - [docs/research-methodology.md](docs/research-methodology.md): scientific framing, research questions, and interdisciplinary method.
 - [docs/open-source-release.md](docs/open-source-release.md): Gitea and GitHub publishing orientation and release checklist.
 - [docs/governance.md](docs/governance.md): canonical remote policy, maintainer roles, and release authority.
@@ -251,8 +252,9 @@ This repository is being prepared to serve two roles:
 
 The intended pattern is:
 
-- Gitea remains the canonical remote for operations and deployment;
-- GitHub mirrors the same codebase for public collaboration;
+- GitHub `main` is the open collaboration branch for the public codebase;
+- Gitea remains the operational remote for controlled deployment;
+- Gitea deploys from `deploy/eva-hadox-org`, not directly from public collaboration traffic;
 - documentation in this repository must be sufficient for external contributors to understand architecture, data flow, and contribution expectations without private operator context.
 
 See [docs/open-source-release.md](docs/open-source-release.md) for the publishing model and release checklist.

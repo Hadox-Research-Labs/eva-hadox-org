@@ -4,17 +4,21 @@
 
 This project uses a dual-remote model:
 
-- canonical operational repository: Gitea at `git.hadox.org`
-- public collaboration mirror: GitHub
+- canonical operational deployment repository: Gitea at `git.hadox.org`
+- public collaboration repository: GitHub
 
-The canonical source of truth is the Gitea repository.
+The authority model is split by responsibility:
+
+- GitHub `main` is the public collaboration branch.
+- Gitea is the operational deployment authority.
+- Gitea branch `deploy/eva-hadox-org` is the branch that should drive production deployment.
 
 That means:
 
-- deployment decisions are authoritative only from Gitea;
-- release tags are authoritative only from Gitea;
-- protected branch policy is defined in Gitea;
-- secrets and operational automation are anchored to Gitea and Drone.
+- production deployment decisions are authoritative only from Gitea;
+- deployment automation is anchored to Gitea and Drone;
+- public contribution flow can happen in GitHub without directly deploying every merged change;
+- production promotion should be a deliberate maintainer act.
 
 ## Why This Model
 
@@ -23,7 +27,7 @@ The project needs both:
 - a dependable operational home tied to existing deployment infrastructure;
 - a public-facing collaboration surface for open source visibility and contribution.
 
-Using Gitea as canonical and GitHub as public mirror keeps operations simple while still allowing public participation.
+Using GitHub for open collaboration and Gitea for controlled deployment is more professional for a live public platform than deploying directly from the public integration branch.
 
 ## Maintainer Responsibilities
 
@@ -37,10 +41,11 @@ Maintainers are expected to:
 
 ## Contribution Intake
 
-Contributions may be discussed or proposed in public mirrors, but maintainers retain authority to:
+Contributions may be discussed or proposed in GitHub, but maintainers retain authority to:
 
-- request that the authoritative merge happen in Gitea;
-- replay or cherry-pick public changes into the canonical branch;
+- review and merge into `main`;
+- decide when a `main` commit is production-ready;
+- promote reviewed commits to `deploy/eva-hadox-org`;
 - close stale or non-aligned proposals;
 - require documentation updates for behavioral changes.
 
@@ -48,12 +53,13 @@ Contributions may be discussed or proposed in public mirrors, but maintainers re
 
 The release authority flow is:
 
-1. changes merge into the canonical Gitea repository;
-2. validation passes on the canonical branch;
-3. maintainers cut release tags from the canonical repository;
-4. tags and release notes are mirrored to GitHub.
+1. changes merge into GitHub `main`;
+2. validated commits are mirrored or synced to Gitea `main`;
+3. maintainers promote a chosen commit to `deploy/eva-hadox-org` in Gitea;
+4. Drone deploys from `deploy/eva-hadox-org`;
+5. release tags are cut from reviewed commits.
 
-If a tag exists only on GitHub and not on Gitea, it should not be treated as authoritative.
+If a commit exists in GitHub `main` but has not been promoted to `deploy/eva-hadox-org`, it should not be treated as the live production state.
 
 ## Documentation Authority
 

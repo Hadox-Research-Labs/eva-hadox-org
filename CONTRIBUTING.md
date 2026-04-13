@@ -7,7 +7,7 @@ This repository is meant to support both:
 
 This document defines the expected contribution workflow for maintainers and external contributors.
 
-For repository authority and release ownership, see [docs/governance.md](docs/governance.md).
+For repository authority and release ownership, see [docs/governance.md](docs/governance.md) and [docs/release-strategy.md](docs/release-strategy.md).
 
 ## Principles
 
@@ -106,15 +106,17 @@ Contributors must not:
 
 The intended collaboration model is:
 
-- Gitea is the canonical repository for deployment and operations.
-- GitHub is the public collaboration and visibility mirror.
-- Changes may be proposed in either location, but maintainers should document which one is authoritative for merge and release decisions.
+- GitHub is the public collaboration and visibility surface.
+- `main` is the open collaboration branch.
+- Gitea is the operational deployment remote.
+- `deploy/eva-hadox-org` is the deployment branch used for `eva.hadox.org`.
 
 For this repository, the default policy is:
 
-- Gitea at `git.hadox.org` is canonical.
-- GitHub is a public mirror and public collaboration surface.
-- release tags and deployment decisions are authoritative only when they come from the canonical Gitea repository.
+- GitHub `main` is where open-source collaboration is expected.
+- Gitea at `git.hadox.org` remains the authoritative deployment remote.
+- deployment promotion happens by moving `deploy/eva-hadox-org` in Gitea after maintainers decide a `main` commit is ready for production.
+- release tags should point to commits already validated in `main`.
 
 If both remotes are used, maintainers should keep:
 
