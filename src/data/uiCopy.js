@@ -3,7 +3,7 @@ const uiCopy = {
     localeLabel: 'Idioma',
     projectTitle: 'Plataforma colaborativa para la historia del cáncer de mama',
     projectFocus:
-      'Encontrar todos los archivos donde se menciona cáncer de mama y comparar coincidencias entre menciones, contextos y vocabularios.',
+      'Explorar el cáncer de mama antes de 1900 desde la historia, la filosofía de la clasificación y el análisis computacional del corpus, comparando menciones, contextos y vocabularios.',
     loadingEyebrow: 'Plataforma de investigación',
     loadingTitle: 'Cargando corpus, menciones y vectores contextuales.',
     heroEyebrow: 'Plataforma de investigación científica',
@@ -215,7 +215,7 @@ const uiCopy = {
     localeLabel: 'Language',
     projectTitle: 'Collaborative platform for the history of breast cancer',
     projectFocus:
-      'Find every archive where breast cancer is mentioned and compare matches across mentions, contexts, and vocabularies.',
+      'Study breast cancer before 1900 through history, philosophy of classification, and computational corpus analysis by comparing mentions, contexts, and vocabularies.',
     loadingEyebrow: 'Research platform',
     loadingTitle: 'Loading corpus, mentions, and contextual vectors.',
     heroEyebrow: 'Scientific research platform',
@@ -426,7 +426,7 @@ const uiCopy = {
     localeLabel: 'Langue',
     projectTitle: 'Plateforme collaborative pour l’histoire du cancer du sein',
     projectFocus:
-      'Repérer toutes les archives où le cancer du sein est mentionné et comparer les concordances entre mentions, contextes et vocabulaires.',
+      'Etudier le cancer du sein avant 1900 a travers l’histoire, la philosophie de la classification et l’analyse computationnelle du corpus en comparant mentions, contextes et vocabulaires.',
     loadingEyebrow: 'Plateforme de recherche',
     loadingTitle: 'Chargement du corpus, des mentions et des vecteurs contextuels.',
     heroEyebrow: 'Plateforme de recherche scientifique',
@@ -638,7 +638,7 @@ const uiCopy = {
     localeLabel: 'Idioma',
     projectTitle: 'Plataforma colaborativa para a historia do cancer de mama',
     projectFocus:
-      'Encontrar todos os arquivos em que o cancer de mama e mencionado e comparar coincidencias entre mencoes, contextos e vocabularios.',
+      'Estudar o cancer de mama antes de 1900 por meio da historia, da filosofia da classificacao e da analise computacional do corpus, comparando mencoes, contextos e vocabularios.',
     loadingEyebrow: 'Plataforma de pesquisa',
     loadingTitle: 'Carregando corpus, mencoes e vetores contextuais.',
     heroEyebrow: 'Plataforma de pesquisa cientifica',
