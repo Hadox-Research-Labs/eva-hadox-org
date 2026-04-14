@@ -112,6 +112,7 @@ See [docs/research-methodology.md](docs/research-methodology.md) for the full me
 - [docs/research-methodology.md](docs/research-methodology.md): scientific framing, research questions, and interdisciplinary method.
 - [docs/open-source-release.md](docs/open-source-release.md): Gitea and GitHub publishing orientation and release checklist.
 - [docs/governance.md](docs/governance.md): canonical remote policy, maintainer roles, and release authority.
+- [docs/reviewer-guide.md](docs/reviewer-guide.md): reviewer expectations and the path toward mandatory PR review.
 - [ROADMAP.md](ROADMAP.md): contributor, reviewer, maintainer, and release growth path.
 - [DATA_RIGHTS.md](DATA_RIGHTS.md): rights and redistribution policy for OCR, archival sources, and uploaded materials.
 - [CONTRIBUTING.md](CONTRIBUTING.md): contributor workflow and collaboration rules.

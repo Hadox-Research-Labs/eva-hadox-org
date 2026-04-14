@@ -1,0 +1,9 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security reports
+    url: mailto:eva@ciencias.unam.mx
+    about: Report security issues privately instead of opening a public issue.
+  - name: Research methodology
+    url: https://github.com/Hadox-Research-Labs/eva-hadox-org/blob/main/docs/research-methodology.md
+    about: Read the methodological framing before proposing analytical changes.
+

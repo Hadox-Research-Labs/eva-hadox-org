@@ -27,3 +27,12 @@ Explain the problem, requirement, or research workflow need that motivated this 
 - [ ] deployment or runtime behavior changed
 
 If runtime behavior changed, describe the impact clearly.
+
+## Review Routing
+
+- [ ] docs-impact
+- [ ] research-impact
+- [ ] ops-impact
+- [ ] tests-only
+
+If this PR changes analytical behavior, corpus interpretation, or deployment expectations, call that out explicitly.
