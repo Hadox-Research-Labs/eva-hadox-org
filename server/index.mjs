@@ -60,7 +60,7 @@ app.get('/api/state', async (_request, response) => {
     project: {
       title: 'Plataforma colaborativa para la historia del cancer de mama',
       focus:
-        'Encontrar todos los archivos donde se menciona cancer de mama y comparar coincidencias entre menciones, contextos y vocabularios.',
+        'Explorar el cancer de mama antes de 1900 desde la historia, la filosofia de la clasificacion y el analisis computacional del corpus, comparando menciones, contextos y vocabularios.',
     },
     terms,
     documents: documents.map(serializeDocument),
