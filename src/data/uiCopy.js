@@ -8,7 +8,7 @@ const uiCopy = {
     loadingTitle: 'Cargando corpus, menciones y vectores contextuales.',
     heroEyebrow: 'Plataforma de investigación científica',
     heroNote:
-      'El foco del estudio está fijado en el corpus completo: localizar todos los archivos donde aparece el vocabulario histórico del cáncer de mama, comparar coincidencias entre menciones y dejar trazable qué parte viene de lectura humana, qué parte de reglas simples y qué parte de vectorización contextual.',
+      'El foco del estudio está puesto en el corpus completo: localizar todos los archivos donde aparece el vocabulario histórico del cáncer de mama, comparar coincidencias entre menciones y dejar claro qué parte proviene de la lectura humana, qué parte de reglas simples y qué parte de la vectorización contextual.',
     studySectionLabel: 'Perfil del estudio',
     evaName: 'Eva Guadalupe Hernández Avilez',
     evaBioLabel: 'Bio',
@@ -18,10 +18,11 @@ const uiCopy = {
     purposeTitle: 'Propósito del estudio',
     purpose:
       'Reconstruir colaborativamente cómo se nombró, describió, trató, reportó y valoró económicamente el cáncer de mama antes de 1900, siguiendo la historia y evolución de las palabras en fuentes médicas, populares y archivísticas.',
-    uploadCallout: 'La plataforma ya permite subir documentos y OCR para que Eva y la comunidad amplíen el corpus.',
-    jumpToUpload: 'Ir a carga de documentos',
+    uploadCallout:
+      'La plataforma ya permite subir documentos y texto OCR para que Eva y la comunidad amplíen el corpus.',
+    jumpToUpload: 'Ir a la carga de documentos',
     stats: {
-      documentsTotal: 'documentos en corpus',
+      documentsTotal: 'documentos en el corpus',
       documentsWithMentions: 'documentos con menciones',
       totalMentions: 'menciones detectadas',
       configuredTerms: 'términos configurados',
@@ -31,9 +32,9 @@ const uiCopy = {
     },
     band: {
       sectionLabel: 'Marco metodológico',
-      title: 'Lo que ya sabemos y cómo se produce',
+      title: 'Lo que ya sabemos y cómo se está produciendo',
       text:
-        'Ya hay coincidencias detectadas en el corpus semilla: términos, síntomas, cirugía, puerperio y relaciones entre documentos. La plataforma ahora muestra esas coincidencias como estado del corpus y no como una consulta aislada. A la vez, abajo queda una capa de prospección con muchos más documentos localizados, pero todavía no curados.',
+        'Ya hay coincidencias detectadas en el corpus semilla: términos, síntomas, cirugía, puerperio y relaciones entre documentos. La plataforma ahora muestra esas coincidencias como un estado del corpus y no como una consulta aislada. A la vez, queda una capa de prospección con muchos más documentos localizados, pero todavía no curados.',
       loading: 'actualizando corpus',
       ready: 'corpus sincronizado',
     },
@@ -88,7 +89,7 @@ const uiCopy = {
     visuals: {
       timelineTitle: 'Cronología de documentos con menciones',
       timelineSubtitle:
-        'Documentos del corpus filtrado contra documentos que efectivamente contienen menciones detectadas.',
+        'Documentos del corpus filtrado frente a documentos que efectivamente contienen menciones detectadas.',
       timelineTotalLabel: 'documentos en corpus filtrado',
       timelineMatchedLabel: 'documentos con menciones',
       topTermsTitle: 'Términos más presentes',
@@ -100,22 +101,22 @@ const uiCopy = {
       cooccurrenceSubtitle: 'Pares de términos que aparecen juntos dentro del mismo fragmento.',
       cooccurrenceMetric:
         'Esto sirve para detectar constelaciones de síntomas, tratamientos o nomenclaturas.',
-      summaryLabel: 'Coincidencias ya detectadas',
+      summaryLabel: 'Coincidencias detectadas',
       summaryTitle: 'Estado actual del corpus',
       sharedFragments: 'fragmentos comparten esta relación.',
       networkTitle: 'Mapa término-obra',
       networkSubtitle:
         'Izquierda: términos históricos. Derecha: obras donde aparecen. El grosor de la línea indica el peso de la relación.',
       networkEmpty: 'Aún no hay suficientes menciones filtradas para dibujar la red.',
-      chartHint: 'La gráfica puede desplazarse en pantallas pequeñas.',
+      chartHint: 'La gráfica se puede desplazar en pantallas pequeñas.',
       networkHint:
-        'Arrastra nodos si quieres reorganizar la lectura. La estructura base ya separa términos y obras.',
+        'Arrastra los nodos si quieres reorganizar la lectura. La estructura base ya separa términos y obras.',
     },
     mentions: {
       sectionLabel: 'Menciones detectadas',
       title: 'Pruebas textuales',
       summary:
-        'Selecciona una mención para ver su contexto y los fragmentos vectorialmente parecidos.',
+        'Selecciona una mención para ver su contexto y los fragmentos vectorialmente similares.',
       empty:
         'No hay menciones para los filtros actuales. Prueba otra categoría, otro tipo de fuente o agrega nuevos términos al léxico.',
       activeLabel: 'Mención activa',
@@ -160,7 +161,7 @@ const uiCopy = {
       sectionLabel: 'Ingreso de fuentes',
       title: 'Cargar documentos nuevos',
       text:
-        'El mismo formulario sirve para Eva y para la comunidad. Se puede subir un archivo escaneado, pegar OCR y dejar metadatos mínimos para que el documento entre al flujo de investigación.',
+        'El mismo formulario sirve para Eva y para la comunidad. Se puede subir un archivo escaneado, pegar OCR y dejar metadatos mínimos para que el documento entre en el flujo de investigación.',
       fieldTitle: 'Título',
       shortTitle: 'Título corto',
       year: 'Año',
@@ -186,7 +187,7 @@ const uiCopy = {
       sectionLabel: 'Documentos conectados',
       title: 'Archivos con menciones detectadas',
       text:
-        'Este listado sirve como reporte operativo de dónde ya apareció el vocabulario histórico dentro del corpus.',
+        'Este listado funciona como un reporte operativo de dónde ya apareció el vocabulario histórico dentro del corpus.',
       mentionsSuffix: 'menciones',
     },
     prospecting: {
